@@ -65,6 +65,34 @@ namespace LeetCode
             return true;
         }
 
+
+        public int RomanToInt(string romanValue)
+        {
+            var mapping = new Dictionary<char, int>
+            {
+                ['I'] = 1,
+                ['V'] = 5,
+                ['X'] = 10,
+                ['L'] = 50,
+                ['C'] = 100,
+                ['D'] = 500,
+                ['M'] = 1000
+            };
+
+            int result = 0;
+            int prevValue = 0;
+            for (int i = romanValue.Length - 1; i >= 0; --i)
+            {
+                var tmpValue = mapping[romanValue[i]];
+
+                result += (prevValue > tmpValue) ? -tmpValue : tmpValue;
+
+                prevValue = tmpValue;
+            }
+
+            return result;
+        }
+
         public static void Main()
         {
         }

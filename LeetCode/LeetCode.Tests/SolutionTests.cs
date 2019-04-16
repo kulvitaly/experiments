@@ -11,7 +11,7 @@ namespace LeetCode.Tests
         [InlineData(new[] { 2, 7, 11, 15 }, 10, null)]
         [InlineData(new[] { 2, 7, 11, 15 }, 14, null)]
         [InlineData(new[] { 3, 2, 4 }, 6, new[] { 1, 2 })]
-        public void TwoSum_InputData_ShouldSuceed(int[] array, int target, int[] expected)
+        public void TwoSum_InputData_ShouldSucceed(int[] array, int target, int[] expected)
         {
             Assert.Equal(expected, new Solution().TwoSum(array, target));
         }
@@ -21,7 +21,7 @@ namespace LeetCode.Tests
         [InlineData(-123, -321)]
         [InlineData(120, 21)]
         [InlineData(1534236469, 0)]
-        public void Reverse_InputData_ShouldSuceed(int value, int expected)
+        public void Reverse_InputData_ShouldSucceed(int value, int expected)
         {
             Assert.Equal(expected, new Solution().Reverse(value));
         }
@@ -35,6 +35,18 @@ namespace LeetCode.Tests
         public void IsPalindrome_ShouldSucceed(int x, bool expected)
         {
             Assert.Equal(expected, new Solution().IsPalindrome(x));
+        }
+
+        [Theory]
+        [InlineData("III", 3)]
+        [InlineData("V", 5)]
+        [InlineData("IV", 4)]
+        [InlineData("IX", 9)]
+        [InlineData("LVIII", 58)]
+        [InlineData("MCMXCIV", 1994)]
+        public void RomanToInt_ShouldSucceed(string romanValue, int expected)
+        {
+            Assert.Equal(expected, new Solution().RomanToInt(romanValue));
         }
     }
 }
