@@ -30,24 +30,6 @@ namespace LeetCode.Collections
 
                 AssignCurrent(l1);
                 l1 = l1.next;
-
-                //if (l2 == null)
-                //{
-                //    AssignCurrent(l1);
-                //    l1 = l1.next;
-                //    continue;
-                //}
-
-                //if (l1.val < l2.val)
-                //{
-                //    AssignCurrent(l1);
-                //    l1 = l1.next;
-                //}
-                //else
-                //{
-                //    AssignCurrent(l2);
-                //    l2 = l2.next;
-                //}
             }
 
             return result;
