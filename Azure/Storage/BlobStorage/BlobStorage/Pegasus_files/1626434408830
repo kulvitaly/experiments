@@ -1,0 +1,319 @@
+com_sas_ci_acs.ob_boot = {
+    getDatahubId:function(){
+    return com_sas_ci_acs.ob_util.ckR('_SI_DID_1.86ce70b8ff00010679027df8');
+	},
+    setDatahubId:function(datahubid){
+		com_sas_ci_acs.ob_util_async.ckW('_SI_DID_1.86ce70b8ff00010679027df8',datahubid,'/','.flypgs.com,.web.flypgs.com',1689506927713);
+	}
+};
+(function(doc, script) {
+    var js, 
+        fjs = doc.getElementsByTagName(script)[0],
+        add = function(url, id) {
+            if (doc.getElementById(id)) {return;}
+            js = doc.createElement(script);
+            js.async = 1;
+            js.src = url;
+            id && (js.id = id);
+            fjs.parentNode.insertBefore(js, fjs);
+        }
+if(typeof(com_sas_ci_acs.version)==="undefined" || com_sas_ci_acs.version.split('.')[0] < 1){
+    com_sas_ci_acs.ob_util.ckW('_SI_VID_1.86ce70b8ff00010679027df8','e31b1fbc4ce86c43dadafa04','/','.flypgs.com,.web.flypgs.com',1689506927713);
+}
+else{
+    com_sas_ci_acs.ob_util_async.ckW('_SI_VID_1.86ce70b8ff00010679027df8','e31b1fbc4ce86c43dadafa04','/','.flypgs.com,.web.flypgs.com',1689506927713);
+}
+if(typeof(com_sas_ci_acs.version)==="undefined" || com_sas_ci_acs.version.split('.')[0] < 1){
+    com_sas_ci_acs.ob_util.ckW('_SI_DID_1.86ce70b8ff00010679027df8','615dbdac-a731-3b82-94e4-ba2d33bd8daf','/','.flypgs.com,.web.flypgs.com',1689506927713);
+}
+else{
+    com_sas_ci_acs.ob_util_async.ckW('_SI_DID_1.86ce70b8ff00010679027df8','615dbdac-a731-3b82-94e4-ba2d33bd8daf','/','.flypgs.com,.web.flypgs.com',1689506927713);
+}
+    com_sas_ci_acs.ob_util_async.load_guid = '87f683542419105fae2554ce';
+if(typeof(com_sas_ci_acs.version)==="undefined" || com_sas_ci_acs.version.split('.')[0] < 1){
+    com_sas_ci_acs.ob_util.sckW('_SI_SID_1.86ce70b8ff00010679027df8','18ab26a554474d2c991cdfc7','/','.flypgs.com,.web.flypgs.com',new Date().getTime(),285106);
+}
+else{
+    com_sas_ci_acs.ob_util_async.sckW('_SI_SID_1.86ce70b8ff00010679027df8','18ab26a554474d2c991cdfc7','/','.flypgs.com,.web.flypgs.com',new Date().getTime(),285106);
+}
+
+
+}(document, 'script'));
+com_sas_ci_acs._ob_configure.prototype.ob_cfg = function()
+{
+   this.ccs='https://eventsingest-eu-prod.ci360.sas.com/t/e/86ce70b8ff00010679027df8';
+   this.csu='https://tngcipegeup-ads.aimatch.com/tngcipegeup/hserver';
+   this.maxContentChange=10;
+   this.maxJsVarChange=10;
+this.maxMediaEvents=200;this.maxTotalEvents=2000;   this.batchSpots=true;
+   this.timeout=2000;
+   this.maxCCMatches=10;
+   this.customerSpotDelivery=false;
+   if(typeof(com_sas_ci_acs.version)==="undefined" || com_sas_ci_acs.version.split('.')[0] < 1){
+      this.load_guid = '87f683542419105fae2554ce';
+   }
+   else{
+      this.load_guid = com_sas_ci_acs.ob_util_async.load_guid;
+   }
+   this.thousands_separator=',';
+   this.decimal_separator='.';
+   if(typeof(com_sas_ci_acs.ob_util.setBaseTimestamp)!=="undefined"){
+      com_sas_ci_acs.ob_util.setBaseTimestamp(1626434927713);
+   }
+   this.sendBodyAsHeaderAll=false;
+   this.sendBodyAsHeaderLoad=false;
+   this.trackCancelledEvents=false;
+   this.trackEventResponses=false;
+}
+com_sas_ci_acs._ob_configure.prototype.getVisitorId = function()
+{
+    return com_sas_ci_acs.ob_util.ckR('_SI_VID_1.86ce70b8ff00010679027df8');
+}
+com_sas_ci_acs._ob_configure.prototype.getDatahubId = function()
+{
+     return com_sas_ci_acs.ob_boot.getDatahubId();
+}
+com_sas_ci_acs._ob_configure.prototype.getSessionId = function()
+{
+    var v=com_sas_ci_acs.ob_util.ckR('_SI_SID_1.86ce70b8ff00010679027df8');
+    if (v==null) return '';
+    return v.split('.')[0];
+}
+com_sas_ci_acs._ob_configure.prototype.getLastActivity = function()
+{
+    var v=com_sas_ci_acs.ob_util.ckR('_SI_SID_1.86ce70b8ff00010679027df8');
+    if (v==null) return 0;
+    var a=v.split('.');
+    if (a.length < 2) return 0;
+    return a[1];
+}
+com_sas_ci_acs._ob_configure.prototype.getMaxInactivity = function()
+{
+    var v=com_sas_ci_acs.ob_util.ckR('_SI_SID_1.86ce70b8ff00010679027df8');
+    if (v==null) return 0;
+    var a=v.split('.');
+    if (a.length < 3) return 0;
+    return a[2];
+}
+com_sas_ci_acs._ob_configure.prototype.updateActivity = function(ts1, ts2)
+{
+ var latestSid=this.getSessionId(); latestSid = latestSid?latestSid:'18ab26a554474d2c991cdfc7';    com_sas_ci_acs.ob_util.sckW('_SI_SID_1.86ce70b8ff00010679027df8', latestSid , '/','.flypgs.com,.web.flypgs.com', ts1, ts2);
+}
+com_sas_ci_acs.ob_event.prototype.termConfiguration = function()
+{
+    var terms = {};
+
+    terms['global'] = {};
+    terms['find'] = {};
+    terms['load'] = {};
+    terms['tsp'] = {};
+    terms['DOMContentLoaded'] = {};
+    terms['click'] = {};
+    terms['exclude'] = {};
+    terms['blur'] = {};
+    terms['change'] = {};
+    terms['cart'] = {};
+    terms['submit'] = {};
+
+if(!com_sas_ci_acs.csz){com_sas_ci_acs.csz=document.documentElement.outerHTML.length;}if(!com_sas_ci_acs.bsz){com_sas_ci_acs.bsz=window.innerWidth+'x'+window.innerHeight;}terms['global']['page_title'] = document.title;
+terms['global']['referrer'] = document.referrer;
+terms['global']['uri'] = document.URL;
+terms['global']['requestedfile'] = com_sas_ci_acs.ob_util.parseUri(document.URL).path;
+terms['load']['tzo'] = new Date().getTimezoneOffset();
+terms['load']['platform'] = navigator.platform;
+terms['load']['cpu'] = navigator.cpuClass;
+terms['load']['port'] = location.port;
+terms['load']['protocol'] = com_sas_ci_acs.ob_util.location();
+terms['load']['flash_enabled'] = com_sas_ci_acs.ob_util.flash().e;
+terms['load']['flash_version'] = com_sas_ci_acs.ob_util.flash().v;
+terms['load']['javascript_enabled'] = true;
+terms['load']['java_enabled'] = com_sas_ci_acs.ob_util.java().e;
+terms['load']['java_version'] = com_sas_ci_acs.ob_util.java().v;
+terms['load']['screen_info'] = screen.width + 'x' + screen.height + '@' + screen.colorDepth;
+if (!com_sas_ci_acs.ob_util.isUndefined(document.documentElement)&&(null!=document.documentElement.getAttribute('lang'))) terms['load']['html.lang'] = document.documentElement.getAttribute('lang');
+if (!com_sas_ci_acs.ob_util.isUndefined(document.documentElement)&&(null!=document.documentElement.getAttribute('xml:lang'))) terms['load']['html.xml:lang'] = document.documentElement.getAttribute('xml:lang');
+terms['load']['browser_language'] = !com_sas_ci_acs.ob_util.isUndefined(navigator.language) ? navigator.language : navigator.browserLanguage;
+terms['load']['character_set'] = com_sas_ci_acs.ob_util.isUndefined(document.charset)?document.characterSet:document.charset;
+terms['load']['csz'] = com_sas_ci_acs.csz;
+terms['load']['bsz'] = com_sas_ci_acs.bsz;
+terms['DOMContentLoaded']['tzo'] = new Date().getTimezoneOffset();
+terms['DOMContentLoaded']['platform'] = navigator.platform;
+terms['DOMContentLoaded']['cpu'] = navigator.cpuClass;
+terms['DOMContentLoaded']['port'] = location.port;
+terms['DOMContentLoaded']['protocol'] = com_sas_ci_acs.ob_util.location();
+terms['DOMContentLoaded']['flash_enabled'] = com_sas_ci_acs.ob_util.flash().e;
+terms['DOMContentLoaded']['flash_version'] = com_sas_ci_acs.ob_util.flash().v;
+terms['DOMContentLoaded']['javascript_enabled'] = true;
+terms['DOMContentLoaded']['java_enabled'] = com_sas_ci_acs.ob_util.java().e;
+terms['DOMContentLoaded']['java_version'] = com_sas_ci_acs.ob_util.java().v;
+terms['DOMContentLoaded']['screen_info'] = screen.width + 'x' + screen.height + '@' + screen.colorDepth;
+if (!com_sas_ci_acs.ob_util.isUndefined(document.documentElement)&&(null!=document.documentElement.getAttribute('lang'))) terms['DOMContentLoaded']['html.lang'] = document.documentElement.getAttribute('lang');
+if (!com_sas_ci_acs.ob_util.isUndefined(document.documentElement)&&(null!=document.documentElement.getAttribute('xml:lang'))) terms['DOMContentLoaded']['html.xml:lang'] = document.documentElement.getAttribute('xml:lang');
+terms['DOMContentLoaded']['browser_language'] = !com_sas_ci_acs.ob_util.isUndefined(navigator.language) ? navigator.language : navigator.browserLanguage;
+terms['DOMContentLoaded']['character_set'] = com_sas_ci_acs.ob_util.isUndefined(document.charset)?document.characterSet:document.charset;
+terms['DOMContentLoaded']['csz'] = com_sas_ci_acs.csz;
+terms['DOMContentLoaded']['bsz'] = com_sas_ci_acs.bsz;
+
+
+
+    return terms;
+}
+com_sas_ci_acs._ob_cart_configuration.prototype.getCartConfig = function()
+{
+   var cart = {};
+
+
+
+    return cart;
+}
+com_sas_ci_acs._ob_cart_configuration.prototype.getCheckoutConfig = function()
+{
+   var cart = {};
+
+
+
+    return cart;
+}
+com_sas_ci_acs._ob_cart_configuration.prototype.getPurchaseConfig = function()
+{
+   var cart = {};
+
+
+
+    return cart;
+}
+com_sas_ci_acs._ob_jsvar_configuration.prototype.getConfig = function()
+{
+    var jsVars = {};
+
+
+jsVars['page_id'] = 'PageID';
+
+    return jsVars;
+}
+com_sas_ci_acs._ob_jsvarchange_configuration.prototype.getConfig = function()
+{
+    var jsChangeVars = {};
+
+
+    return jsChangeVars;
+}
+com_sas_ci_acs._ob_contentvisible_configuration.prototype.getConfig = function()
+{
+    var contentVars = {};
+
+
+
+    return contentVars;
+}
+com_sas_ci_acs._ob_configure.prototype.getFormConfig = function()
+{
+   var ff = {};
+   ff['nature'] = 'inc';
+
+   ff['obs'] = [];
+   ff['ign'] = [];
+   ff['inc'] = [];
+
+
+ff['nature'] = 'inc';
+
+    return ff;
+}
+com_sas_ci_acs._ob_configure.prototype.isCollectionEnabled = function()
+{
+   var collect = {};
+
+
+collect['clicks'] = 'true';
+collect['contentevents'] = 'true';
+collect['fieldinteractions'] = 'false';
+collect['formsubmits'] = 'false';
+collect['jsvars'] = 'true';
+collect['media'] = 'true';
+collect['mouseovers'] = 'false';
+collect['pageloads'] = 'true';
+
+   collect['pageloads_eventid'] = [];
+   collect['pageloads_eventname'] = [];
+   collect['pageloads_eventtype'] = [];
+   collect['pageloads_eventsubtype'] = [];
+   collect['pageloads_prd_selector'] = [];
+   collect['pageloads_system_type'] = [];
+   collect['formsubmits_eventid'] = [];
+   collect['formsubmits_eventname'] = [];
+   collect['formsubmits_system_type'] = [];
+   collect['formsubmits_elements'] = [];
+   collect['clicks_eventid'] = [];
+   collect['clicks_eventname'] = [];
+   collect['clicks_system_type'] = [];
+   collect['changevar_eventid'] = [];
+   collect['changevar_attributes'] = [];
+   collect['content_eventid'] = [];
+   collect['content_attributes'] = [];
+   collect['pageloads_attributes'] = [];
+   collect['formsubmits_attributes'] = [];
+   collect['clicks_attributes'] = [];
+   collect['event_properties'] = [];
+   collect['clickThrough_system_eventid'] = [];
+   collect['impression_system_eventid'] = [];
+   collect['pageloads_system_eventid'] = [];
+   collect['newsession_system_eventid'] = [];
+   collect['focus_system_eventid'] = [];
+   collect['defocus_system_eventid'] = [];
+   collect['notification_opened_system_eventid'] = [];
+   collect['email_open_system_eventid'] = [];
+   collect['email_send_system_eventid'] = [];
+   collect['email_view_system_eventid'] = [];
+   collect['email_click_system_eventid'] = [];
+   collect['email_hard_bounce_system_eventid'] = [];
+   collect['email_opt-out_system_eventid'] = [];
+   collect['email_spam_system_eventid'] = [];
+   collect['email_reply_system_eventid'] = [];
+   collect['loginevent_attributes'] = [];
+
+collect['email_opt-out_system_eventid'].push('04ba5dba-36d3-44bf-af25-11725aa45124');
+
+collect['pageloads_system_eventid'].push('0cfe3a1d-f258-41cc-9fac-9f66741548ad');
+
+collect['email_reply_system_eventid'].push('23c1902d-a2d4-4e9a-9ef3-c8ea1f7b353c');
+
+
+
+collect['email_send_system_eventid'].push('369452db-0a91-4e93-afed-508fac70ec00');
+
+collect['email_hard_bounce_system_eventid'].push('3b7159ca-3bd9-408c-a1a3-7515ca863b18');
+
+collect['email_click_system_eventid'].push('5656fe47-3c8f-4481-8a1e-27e44532667d');
+
+collect['email_open_system_eventid'].push('5f036912-0dc0-4333-82e1-eafa9906280b');
+
+collect['notification_opened_system_eventid'].push('6312843e-0525-4a6c-88d3-713cdb9704b1');
+
+collect['impression_system_eventid'].push('64c56531-3bd7-4f0d-af33-fb4173b67c53');
+
+collect['clickThrough_system_eventid'].push('7de48d1a-e148-4a7c-8acf-13b9efd678f3');
+
+
+
+
+
+
+
+collect['email_view_system_eventid'].push('a85d4213-635d-4514-a172-3b559471a382');
+
+
+
+
+
+collect['email_spam_system_eventid'].push('df8e5dd0-5d70-4a1e-9c99-5a6e71f45e35');
+
+collect['newsession_system_eventid'].push('f542293e-9ba8-4749-9b00-f1a75f20371a');
+
+
+    return collect;
+}
+
+com_sas_ci_acs.ob_util.specialClickProcessing=true;
+com_sas_ci_acs.cacheCollect=com_sas_ci_acs._ob_configure.prototype.isCollectionEnabled();com_sas_ci_acs._ob_configure.prototype.isCollectionEnabled=function(){return com_sas_ci_acs.cacheCollect;};
+com_sas_ci_acs.ob_configure.initialize();
