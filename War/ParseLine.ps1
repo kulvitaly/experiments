@@ -16,8 +16,6 @@ for ($i = 1; $i -lt $parts.count; $i++) {
     .\Log -l VRB -s 'ParseLine' "$($i)  $($parts.count) Process part $($parts[$i])"
     $url =  $parts[$i].Trim('(', ' ', ')', ',')
     .\Log -l VRB -s 'ParseLine' "Trimmed $($url)"
-    $url = $url.Replace('/tcp', '')
-    .\Log -l VRB -s 'ParseLine' "Removed tcp $($url)"
     $url = "$($parts[0]):$($url)"
     .\Log -l VRB -s 'ParseLine' "Result: $($url)"
     $urls.Add($url)

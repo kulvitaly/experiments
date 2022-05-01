@@ -1,11 +1,11 @@
 ﻿param(
-    [string] $urlsPath = "./urls.txt",
+    [string] $UrlsPath = "./urls.txt",
     [int] $agentCount = 100,
     [string] $executionTime = "60s",
     [int] $finishTimeout = 100
 )
 
-$urls = [System.IO.File]::ReadLines($urlsPath)
+$urls = [System.IO.File]::ReadLines($UrlsPath)
 
 $id = 1
 
@@ -16,7 +16,7 @@ ForEach ($url in $urls)
 
     az group create --location westus --name $resourceGroup
     
-    for ($i = 1; $i -lt 20; $i++)
+    for ($i = 0; $i -lt 20; $i++)
     {
         $location = .\GetRandomLocation
 

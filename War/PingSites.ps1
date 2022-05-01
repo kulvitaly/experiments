@@ -18,7 +18,7 @@ $lines = [System.IO.File]::ReadLines($LinesPath)
 
 $location = .\GetRandomLocation
 
-$resourceGroup = "rg-rw-ping-2-$(Get-Date -Format "MM-dd")"
+$resourceGroup = "rg-rw-ping-$(Get-Date -Format "MM-dd")"
 az group create --location $location --name $resourceGroup
 
 $id = 1
@@ -41,7 +41,7 @@ ForEach ($line in $lines)
 
         .\Log -s 'PingSites' "ResouceGroup: ${resourceGroup} Container: ${name} location: ${location} url: ${url}";
 
-        az container create --resource-group $resourceGroup --name $name --image alpine/bombardier:latest --restart-policy OnFailure --command-line "/gopath/bin/bombardier -c ${$AgentCount} -d ${ExecutionTime} --${HttpMethod} -l ${url}" --location $location
+        az container create --resource-group $resourceGroup --name $name --image alpine/bombardier:latest --restart-policy OnFailure --command-line "/gopath/bin/bombardier -c 100 -d 60s --http1 -l ${url}" --location $location
     
         $containerUrlMap.Add($name, $url)
 
@@ -63,16 +63,18 @@ ForEach ($key in $containerUrlMap.keys) {
     .\Log $logs
 
     # Filter out unsuccessful 
-    if ($logs -Contains "1xx - 0, 2xx - 0, 3xx - 0, 4xx - 0, 5xx - 0") {
-        .\Log -s 'PingSites' "Ping ${url}. Result: FAIL"
-    }
-    else {
+    $match = $logs -match '1xx - 0, 2xx - 0, 3xx - 0, 4xx - 0, 5xx - 0'
+    .\Log -s 'PingSites' "Match: $match"
+    if (![string]::IsNullOrEmpty($logs) -and $logs -match 'Bombarding' -and !($logs -match '1xx - 0, 2xx - 0, 3xx - 0, 4xx - 0, 5xx - 0')) {
         .\Log -s 'PingSites' "Ping ${url}. Result: SUCCESS"
         if (!(Test-Path $TargetUrlsPath)) {
             New-Item -Path $TargetUrlsPath -ItemType "file"
         }
 
         Add-content $TargetUrlsPath -value ${url}
+    } 
+    else {
+        .\Log -s 'PingSites' "Ping ${url}. Result: FAIL"
     }
 }
 
