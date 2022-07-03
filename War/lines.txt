@@ -1,58 +1,140 @@
+https://www.ugsk.ru/
+62.76.123.22 (80/tcp, 443/tcp)
+https://e-osago.ugsk.ru/personal/
+45.134.126.161 (80/tcp, 443/tcp)
 
-https://www.1tv.ru/live
-178.248.233.188 (80/tcp, 443/tcp)
-https://tlxmob.1tv.ru/
-178.248.239.23 (80/tcp, 443/tcp)
-https://25.1tv.ru/
-178.248.233.188 (80/tcp, 443/tcp)
-https://kino.1tv.ru/
-178.248.238.75 (80/tcp, 443/tcp)
-https://users.1tv.ru/
-178.248.233.188 (80/tcp, 443/tcp)
-https://admin.kino.1tv.ru/
-178.248.238.75 (80/tcp, 443/tcp)
-https://subscr.1tv.ru/
-81.211.33.101 (21/tcp, 80/tcp)
+http://absolutins.ru/
+146.158.12.108 (80/tcp, 443/tcp)
 
-https://smotrim.ru/
-178.248.232.222 (80/tcp, 443/tcp)
-https://api.smotrim.ru/
-178.248.232.222 (80/tcp, 443/tcp)
+http://zettains.ru/
+178.248.233.86 (80/tcp, 443/tcp)
+https://osago.zettains.ru/webclaimexpert/Auth.jasp
+217.74.44.213 (443/tcp)
 
-https://www.ivi.tv/
-80.67.43.65 (80/tcp, 443/tcp)
-80.67.43.33 (80/tcp, 443/tcp)
-80.67.43.1 (80/tcp, 443/tcp)
+https://astrovolga.ru/
+https://b2c.astrovolga.ru/personal/index.php?
+5.8.29.242 (80/tcp, 443/tcp)
 
-https://okko.tv/
-185.169.155.118 (80/tcp, 443/tcp)
-https://cabinet.okko.tv/login
-151.236.80.51 (80/tcp, 443/tcp)
-https://agents.okko.tv/
-178.170.242.84 (80/tcp, 443/tcp)
-https://premiere.okko.tv/
-178.170.242.84 (80/tcp, 443/tcp)
-https://show.okko.tv/
-185.169.155.116 (80/tcp, 443/tcp)
-https://mimimi.okko.team/
-151.236.80.50 (80/tcp, 443/tcp)
-https://pobeda.okko.tv/
-185.169.155.116 (80/tcp, 443/tcp)
+https://www.tinkoffinsurance.ru/
+178.248.236.218 (80/tcp, 443/tcp)
 
-https://www.ontvtime.ru/
-91.242.33.252 (80/tcp, 443/tcp)
+https://www.renins.ru/
+81.177.103.109 (80/tcp, 443/tcp)
+https://eosagou.renins.ru/personal/
+194.190.22.68 (80/tcp, 443/tcp)
 
-https://www.tvigle.ru/
-https://cloud.tvigle.ru/
-79.142.100.81 (80/tcp, 443/tcp, 8088/tcp, 8099/tcp, 8123/tcp)
-79.142.100.86 (80/tcp, 443/tcp, 8088/tcp, 8099/tcp, 8123/tcp)
-79.142.100.82 (80/tcp, 443/tcp, 8088/tcp, 8099/tcp, 8123/tcp)
-79.142.100.87 (80/tcp, 443/tcp, 8088/tcp, 8099/tcp, 8123/tcp)
-79.142.100.84 (80/tcp, 443/tcp, 8088/tcp, 8099/tcp, 8123/tcp)
-79.142.100.85 (80/tcp, 443/tcp, 8088/tcp, 8099/tcp, 8123/tcp)
-79.142.100.83 (80/tcp, 443/tcp, 8088/tcp, 8099/tcp, 8123/tcp)
-79.142.100.80 (80/tcp, 443/tcp, 8088/tcp, 8099/tcp, 8123/tcp)
-https://vendor.tvigle.ru/login
-79.142.100.44 (80/tcp, 443/tcp, 8088/tcp, 8099/tcp, 8123/tcp)
-https://downloader.tvigle.ru/
-79.142.100.44 (80/tcp, 443/tcp, 8088/tcp, 8099/tcp, 8123/tcp)
+https://kaplife.ru/
+178.154.232.208 (21/tcp, 22/tcp, 80/tcp, 443/tcp)
+https://online.kaplife.ru/life_cabinet/Account/Logon
+194.8.233.23 (80/tcp, 443/tcp)
+
+https://www.titins.ru/
+185.9.84.195 (80/tcp, 443/tcp)
+https://online.titins.ru/
+185.9.84.203 (80/tcp, 443/tcp)
+
+https://www.ppfinsurance.ru/
+79.174.66.19 (80/tcp, 443/tcp)
+https://my.ppfinsurance.ru/
+194.226.175.18 (80/tcp, 443/tcp)
+
+https://sovcomins.ru/
+178.248.233.178 (80/tcp, 443/tcp)
+https://online.sovcomins.ru/products/login.xhtml
+https://online.sovcomins.ru/oauth/login
+78.155.198.109 (80/tcp, 443/tcp)
+
+https://ulife.ru/
+31.184.218.36 (22/tcp, 80/tcp, 443/tcp)
+https://b2b.ulife.ru/b2c/lkk/build/
+91.212.60.230 (80/tcp, 443/tcp)
+
+https://prominstrah.ru/
+212.41.10.19 (21/tcp, 25/tcp, 80/tcp, 443/tcp, 465/tcp, 3306/tcp)
+
+https://www.uralsibins.ru/
+https://lk.uralsibins.ru/login
+185.71.67.40 (21/tcp, 22/tcp, 25/tcp, 80/tcp, 443/tcp, 465/tcp, 3306/tcp)
+
+https://insurance.rncb.ru/
+195.200.209.163 (80/tcp, 443/tcp)
+
+https://www.inko-med.ru/
+185.26.114.156 (21/tcp, 80/tcp, 443/tcp, 3306/tcp)
+https://promo.inko-med.ru/
+185.215.4.20 (80/tcp, 443/tcp)
+https://polis.inko-med.ru/
+195.24.68.24 (80/tcp, 443/tcp)
+
+https://www.arsenalins.ru/
+185.154.54.6 (21/tcp, 22/tcp, 25/tcp, 80/tcp, 443/tcp, 465/tcp, 3306/tcp)
+
+https://www.sovcomlife.ru/
+89.22.165.77 (80/tcp, 443/tcp)
+
+https://www.renlife.ru/
+84.201.186.163 (22/tcp, 80/tcp, 443/tcp)
+
+https://akbarsstrah.ru/
+https://lk.akbarsstrah.ru/login?return=%2F
+185.12.94.232 (22/tcp, 80/tcp, 443/tcp)
+
+https://medexpress.ru/
+178.154.215.137 (80/tcp, 443/tcp)
+
+https://www.d2insur.ru/
+80.89.147.170 (80/tcp, 443/tcp)
+https://client.d2insur.ru/my/policy/
+81.1.253.46 (80/tcp, 443/tcp)
+
+http://www.icbask.ru/
+217.112.35.72 (21/tcp, 22/tcp, 80/tcp, 443/tcp)
+https://epolis.icbask.com/
+82.200.14.165 (80/tcp, 443/tcp)
+
+https://rgs.ru/
+178.248.233.20 (80/tcp, 443/tcp)
+https://my.rgs.ru/
+178.248.234.233 (80/tcp, 443/tcp)
+
+https://spasskievorota.ru/
+178.210.72.193 (80/tcp, 443/tcp)
+
+https://www.vsk.ru/
+89.207.89.133 (22/tcp, 80/tcp, 443/tcp)
+https://shop.vsk.ru/personal
+66.22.99.23 (80/tcp, 443/tcp)
+
+https://www.makcm.ru/
+77.108.114.74 (80/tcp, 443/tcp)
+
+https://bcslife.ru/
+31.177.78.184 (80/tcp, 443/tcp)
+https://lk.bcslife.ru/authorization
+31.177.79.103 (80/tcp, 443/tcp)
+
+http://www.ibg.ru/
+37.140.192.133 (21/tcp, 22/tcp, 25/tcp, 80/tcp, 443/tcp, 465/tcp, 3306/tcp)
+https://lk.bcslife.ru/authorization
+31.177.79.103 (80/tcp, 443/tcp)
+
+http://interi-sk.ru/
+37.140.192.98 (21/tcp, 25/tcp, 80/tcp, 443/tcp, 465/tcp, 3306/tcp)
+
+https://rosbankinsurance.ru/
+95.213.129.45 (21/tcp, 22/tcp, 25/tcp, 80/tcp, 443/tcp, 465/tcp)
+
+https://www.lifeingos.ru/
+193.233.15.129 (21/tcp, 22/tcp, 25/tcp, 80/tcp, 443/tcp, 465/tcp, 3306/tcp)
+https://www.ingos.ru/cabinet/
+195.245.206.101 (80/tcp, 443/tcp)
+
+https://uralsib-life.ru/
+92.242.38.43 (80/tcp, 443/tcp)
+https://lk.uralsib-life.ru/login
+92.242.38.56 (22/tcp, 80/tcp, 443/tcp)
+
+https://www.rsins.ru/
+89.104.87.8 (80/tcp, 443/tcp)
+https://lk.rsins.ru/
+178.210.84.95 (80/tcp, 443/tcp)

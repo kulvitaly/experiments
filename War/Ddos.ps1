@@ -8,7 +8,7 @@ param(
 
 .\Log "==== Start Ddos ===="
 
-$TargetUrlsPath = "./urls.txt"
+$TargetUrlsPath = "./urls-$(Get-Date -Format "MM-dd")-$(Get-Random).txt"
 
 if (Test-Path $TargetUrlsPath) {
     .\Log -s 'ParseLine' "Remove old urls file: $TargetUrlsPath"
