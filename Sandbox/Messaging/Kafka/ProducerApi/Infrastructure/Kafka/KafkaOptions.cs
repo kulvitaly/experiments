@@ -10,7 +10,5 @@ public class KafkaOptions
 {
     public const string Kafka = "Kafka";
 
-    public string CertificateDirectory { get; set; }
-
-    public string ConfigurationPath { get; set; }
+    public string BootstrapServer { get; set; }
 }

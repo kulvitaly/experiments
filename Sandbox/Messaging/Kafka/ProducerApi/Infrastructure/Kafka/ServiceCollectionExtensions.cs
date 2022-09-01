@@ -6,12 +6,19 @@ namespace Infrastructure.Kafka;
 
 public static partial class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddKafka(this IServiceCollection services, IConfiguration configuration, string kafkaSection = KafkaOptions.Kafka)
+    public static IServiceCollection AddKafkaProducer(this IServiceCollection services, IConfiguration configuration, string kafkaSection = KafkaOptions.Kafka)
     {
         return services
             .Configure<KafkaOptions>(configuration.GetSection(kafkaSection))
             .AddSingleton<KafkaMessageSendingService>()
             .AddSingleton<ITopicAdministrator, KafkaMessageSendingService>()
             .AddSingleton<IMessageSender, KafkaMessageSendingService>();
+    }
+
+    public static IServiceCollection AddKafkaConsumer(this IServiceCollection services, IConfiguration configuration, string kafkaSection = KafkaOptions.Kafka)
+    {
+        return services
+            .Configure<KafkaConsumerOptions>(configuration.GetSection(kafkaSection))
+            .AddSingleton<IMessageConsumingService, KafkaMessageConsumingService>();
     }
 }

@@ -18,8 +18,7 @@ public class KafkaMessageSendingService : IMessageSender, ITopicAdministrator
     {
         _logger = logger;
 
-        var options = kafkaOptions.Value;
-        _clientConfigLazy = new(() => LoadConfigAsync(options.ConfigurationPath, options.CertificateDirectory));
+        _clientConfigLazy = new(() => LoadConfigAsync(kafkaOptions.Value));
     }
 
     public async Task CreateTopicAsync(TopicInfo topicSpec, CancellationToken cancellationToken)
@@ -75,29 +74,33 @@ public class KafkaMessageSendingService : IMessageSender, ITopicAdministrator
     }
 
     // copied from example: https://github.com/confluentinc/examples/blob/7.2.1-post/clients/cloud/csharp/Program.cs
-    private async Task<ClientConfig> LoadConfigAsync(string configPath, string certDir)
+    private async Task<ClientConfig> LoadConfigAsync(KafkaOptions kafkaOptions)
     {
-        try
+        return new ClientConfig
         {
-            var cloudConfig = (await File.ReadAllLinesAsync(configPath))
-                .Where(line => !line.StartsWith("#") && !line.Length.Equals(0))
-                .ToDictionary(
-                    line => line.Substring(0, line.IndexOf('=')),
-                    line => line.Substring(line.IndexOf('=') + 1));
+            BootstrapServers = kafkaOptions.BootstrapServer
+        };
+        //try
+        //{
+        //    var cloudConfig = (await File.ReadAllLinesAsync(configPath))
+        //        .Where(line => !line.StartsWith("#") && !line.Length.Equals(0))
+        //        .ToDictionary(
+        //            line => line.Substring(0, line.IndexOf('=')),
+        //            line => line.Substring(line.IndexOf('=') + 1));
 
-            var clientConfig = new ClientConfig(cloudConfig);
+        //    var clientConfig = new ClientConfig(cloudConfig);
 
-            if (certDir != null)
-            {
-                clientConfig.SslCaLocation = certDir;
-            }
+        //    if (certDir != null)
+        //    {
+        //        clientConfig.SslCaLocation = certDir;
+        //    }
 
-            return clientConfig;
-        }
-        catch (Exception e)
-        {
-            _logger.LogCritical(e, "An error occured reading the config file from '{ConfigPath}': {Message}", configPath);
-            throw;
-        }
+        //    return clientConfig;
+        //}
+        //catch (Exception e)
+        //{
+        //    _logger.LogCritical(e, "An error occured reading the config file from '{ConfigPath}': {Message}", configPath);
+        //    throw;
+        //}
     }
 }

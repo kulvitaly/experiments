@@ -16,7 +16,7 @@ public class SendMessageEndpoint : EndpointBaseAsync
 
     public SendMessageEndpoint(IMediator mediator) => _mediator = mediator;
 
-    [HttpPost("api/[namespace]/{Topic}/message")]
+    [HttpPost("api/Kafka/{Topic}/message")]
     [SwaggerOperation(
     Summary = "Sends message via messaging Bus",
     Description = "Sends message via messaging Bus",
