@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: producer-api
+spec:
+  selector:
+    matchLabels:
+      app: producer-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: producer-api
+    spec:
+      containers:
+      - name: producer-api
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 100m
+            ephemeral-storage: 1Gi
+          limits:
+            memory: 256Mi
+            cpu: 200m
+            ephemeral-storage: 2Gi
+        image: producer-api
+        ports:
+        - containerPort: 80
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Development"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: producer-api
+spec:
+  selector:
+    app: producer-api
+  ports:
+    - protocol: TCP
+      port: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-producer-api
+spec:
+  rules:
+  - host: producer-api.kulvetal.net
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: producer-api
+            port:
+              number: 80
+#---
+#apiVersion: networking.k8s.io/v1
+#kind: Ingress
+#metadata:
+#  name: ingress-producer-api-new
+#  annotations:
+#    nginx.ingress.kubernetes.io/rewrite-target: /$2
+#spec:
+#  rules:
+#  - host: api-redfdev.cvlabs.net
+#    http:
+#      paths:
+#      - path: /conf-api(/|$)(.*)
+#        pathType: Prefix
+#        backend:
+#          service:
+#            name: producer-api
+#            port:
+#              number: 80

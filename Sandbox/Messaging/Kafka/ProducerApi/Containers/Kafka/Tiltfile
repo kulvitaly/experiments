@@ -1,0 +1,7 @@
+load('ext://helm_remote', 'helm_remote')
+helm_remote('cp-helm-charts',
+            repo_name='confluentinc',
+            repo_url='https://confluentinc.github.io/cp-helm-charts/')
+
+k8s_resource('cp-helm-charts-cp-zookeeper', port_forwards='22181:2181')
+k8s_resource('cp-helm-charts-cp-kafka', port_forwards='29092:29092')

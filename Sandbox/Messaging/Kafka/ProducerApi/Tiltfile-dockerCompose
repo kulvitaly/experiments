@@ -1,0 +1,31 @@
+version_settings(constraint='>=0.22.1')
+
+docker_compose('docker-compose.yml')
+
+docker_build('kulvetal/producer-api',
+    '.',
+    dockerfile = './ProducerApi/Dockerfile',
+    live_update = [
+        # Sync local files into the container.
+        sync('/ProducerApi/bin/Debug/net6.0', '/app'),
+
+        # Re-run npm install whenever package.json changes.
+        #run('docker build -t kulvetal/producer-api -f ./ProducerApi/Dockerfile .', trigger='package.json'),
+
+        # Restart the process to pick up the changed files.
+        restart_container()
+  ])
+
+docker_build('kulvetal/consumer',
+    '.',
+    dockerfile = './Consumer.WorkerService/Dockerfile',
+    live_update = [
+        # Sync local files into the container.
+        sync('.', '/Consumer.WorkerService'),
+
+        # Re-run npm install whenever package.json changes.
+        #run('npm i', trigger='package.json'),
+
+        # Restart the process to pick up the changed files.
+        restart_container()
+  ])

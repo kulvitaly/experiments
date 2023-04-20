@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>dotnet-Consumer.WorkerService-5739F233-A54A-46E2-89CA-054E555B8B3D</UserSecretsId>
+    <UserSecretsId>dotnet-Consumer-5739F233-A54A-46E2-89CA-054E555B8B3D</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 

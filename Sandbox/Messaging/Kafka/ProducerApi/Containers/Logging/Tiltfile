@@ -1,0 +1,6 @@
+load('ext://helm_remote', 'helm_remote')
+helm_remote('seq',
+            repo_name='datalust',
+            repo_url='https://helm.datalust.co')
+
+k8s_resource('seq', port_forwards=['580:80', '5443:445', '5341'])
