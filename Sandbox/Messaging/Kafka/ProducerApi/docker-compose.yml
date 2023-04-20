@@ -35,10 +35,10 @@ services:
 
 # Services
   producer:
-    image: kulvetal/producer-api:latest
+    image: kulvetal/producer-api
     ports:
       - '5000:80'
 
   consumer:
-    image: kulvetal/consumer:latest
+    image: kulvetal/consumer
 

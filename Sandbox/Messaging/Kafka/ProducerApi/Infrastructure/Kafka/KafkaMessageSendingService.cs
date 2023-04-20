@@ -80,27 +80,5 @@ public class KafkaMessageSendingService : IMessageSender, ITopicAdministrator
         {
             BootstrapServers = kafkaOptions.BootstrapServer
         };
-        //try
-        //{
-        //    var cloudConfig = (await File.ReadAllLinesAsync(configPath))
-        //        .Where(line => !line.StartsWith("#") && !line.Length.Equals(0))
-        //        .ToDictionary(
-        //            line => line.Substring(0, line.IndexOf('=')),
-        //            line => line.Substring(line.IndexOf('=') + 1));
-
-        //    var clientConfig = new ClientConfig(cloudConfig);
-
-        //    if (certDir != null)
-        //    {
-        //        clientConfig.SslCaLocation = certDir;
-        //    }
-
-        //    return clientConfig;
-        //}
-        //catch (Exception e)
-        //{
-        //    _logger.LogCritical(e, "An error occured reading the config file from '{ConfigPath}': {Message}", configPath);
-        //    throw;
-        //}
     }
 }

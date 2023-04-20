@@ -1,0 +1,5 @@
+trigger_mode(TRIGGER_MODE_MANUAL)
+include('./Containers/Logging/Tiltfile')
+include('./Containers/Kafka/Tiltfile')
+include('./ProducerApi/Tiltfile')
+include('./Consumer/Tiltfile')
