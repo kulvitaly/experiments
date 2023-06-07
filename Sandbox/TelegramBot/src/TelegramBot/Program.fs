@@ -7,12 +7,15 @@ open Funogram.Telegram.Bot
 open Recycling.Domain
 open Recycling.Repository
 
+let RecyclingClassToColor(recyclingClass) =
+    match recyclingClass with
+    | Recycling -> "🟢"
+    | Burning -> "🟠"
+    | ThrowingAway -> "🔴"
+    | _ -> ""
+
 let MaterialToString(material: Material) =
-    let color =  match material.Class with
-                | Recycling -> "🟢"
-                | Burning -> "🟠"
-                | ThrowingAway -> "🔴"
-                | _ -> ""
+    let color =  RecyclingClassToColor material.Class
     
     let notes = material.Notes |> String.concat ","
     match notes.Length with
@@ -27,11 +30,7 @@ let BuildMaterialMessage(categories: Material list) =
 let CategoryToString(category: MaterialCategory) =
     let colors = 
         List.fold(fun acc c -> 
-            let color = match c with
-                | Recycling -> "🟢"
-                | Burning -> "🟠"
-                | ThrowingAway -> "🔴"
-                | _ -> ""
+            let color = RecyclingClassToColor c
             $"{acc}{color}") "" category.Classes
 
     let aliases = category.Aliases |> String.concat ","
@@ -45,7 +44,7 @@ let BuildCategoriesMessage(categories: MaterialCategory list) =
     |> String.concat Environment.NewLine
     
 let ShowCategories (ctx: UpdateContext) =
-
+    // TODO: we should use DI
     let repo = new SimpleRepository()
     
     let categories = (repo :> IRecyclingRepository).getMaterialCategories()
@@ -58,27 +57,10 @@ let ShowCategories (ctx: UpdateContext) =
     | _ -> ()
 
 let DescribeCategory command: string =
-
+    // TODO: we should use DI
     let repo = new SimpleRepository()
     (repo :> IRecyclingRepository).getMaterialInfo(command)
     |> BuildMaterialMessage
-
-// let DescribeCategory command =
-//     match command with
-//     | "PET-1" -> "🟢 Пляшки прозора з-під напоїв без відтінку
-// 🟢 Пляшки прозора з-під напоїв з блакитним відтінком 
-// 🟢 Пляшки прозора з-під напоїв з зеленим відтінком
-// 🟢 Пляшки прозора з-під напоїв з коричневим відтінком
-// 🟢 Пляшки прозора з-під напоїв з жовтим відтінком
-// 🟢 Пляшки з-під напоїв чорна
-// 🟢 Пляшки білі з-під молочки
-// 🟢 Пляшки прозорі з-під молочки
-// 🟢 Пляшки з-під олії прозорі
-// 🟢 Пляшки з-під оцту та соєвого соусу, тільки якщо етикетка легко знімається (сортуються в один бак з пляшками з-під олії)
-// 🟢 Прозорі й кольорові пляшки з-під засобів побутової хімії (кришечки, ковпачки, дозатори й наліпки можна лишати)
-// 🟠 Непрозорі пляшки з-під молочних та інших виробів, темно-синього та світло-коричневого кольору
-// 🟠 Усі інші вироби з маркуванням «PET-1»: (одноразовий посуд, блістери, кришки тощо)"
-//     | _ -> "Unknown category"
 
 let HandleCommand ctx command =
     match ctx.Update.Message with
@@ -96,19 +78,10 @@ let updateArrived (ctx: UpdateContext) =
         cmdScan "%s" (fun cmd ctx -> HandleCommand ctx cmd)
     |] |> ignore
 
-    // match ctx.Update.Message with
-    // | Some { MessageId = messageId; Chat = chat } ->
-    //     Api.sendMessageReply chat.Id "Hello, world!" messageId |> api ctx.Config
-    //     |> Async.Ignore
-    //     |> Async.Start
-    // | _ -> ()
-
-
 [<EntryPoint>]
 let main _ =
     async {
-        //let config = Config.defaultConfig |> Config.withReadTokenFromFile
-        let config = { Config.defaultConfig with Token = "5853779019:AAFZd1_tm4bLr-adFhJJXihT0-fADIcWDP8" }
+        let config = Config.defaultConfig |> Config.withReadTokenFromEnv "TrashRecyclingBotToken"
         let! _ = Api.deleteWebhookBase () |> api config
         return! startBot config updateArrived None
     } |> Async.RunSynchronously

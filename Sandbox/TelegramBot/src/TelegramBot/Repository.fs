@@ -7,6 +7,7 @@ type SimpleRepository() =
     interface IRecyclingRepository with 
         member this.getMaterialCategories() =
             [
+                // TODO: we should calculate recycling classes based on material rules
                 MaterialCategory("PET-1", ["1"; "Поліетилентерефталат"; "ПЕТ"; "ПЕТФ"; "PET"; "PETE"], [Recycling; Burning])
                 MaterialCategory("HDPE", ["2"; "Поліетилен високої щільності"; "Поліетилен низького тиску"; "PE-HD"], [Recycling])
                 MaterialCategory("PVC", ["3"; "Полівінілхлорид"; "ПВХ"], [ThrowingAway])
