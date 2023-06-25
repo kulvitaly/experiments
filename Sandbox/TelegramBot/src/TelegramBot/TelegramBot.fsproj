@@ -11,9 +11,10 @@
     <Compile Include="Program.fs" />
   </ItemGroup>
 
+  <ItemGroup />
+
   <ItemGroup>
     <PackageReference Include="Funogram" Version="2.0.4" />
     <PackageReference Include="Funogram.Telegram" Version="6.1.0.1" />
   </ItemGroup>
-
 </Project>

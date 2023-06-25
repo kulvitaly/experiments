@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  telegrambot:
+    image: ${DOCKER_REGISTRY-}telegrambot
+    container_name: telegrambot
+    build:
+      context: .
+      dockerfile: src/TelegramBot/Dockerfile
+    ports:
+      - 5001:80
+      - 5002:443
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - BOT_TOKEN_FILE=/run/secrets/BotTokenSecret
+    secrets:
+      - BotTokenSecret
+secrets:
+  BotTokenSecret:
+    file: ./token
+
