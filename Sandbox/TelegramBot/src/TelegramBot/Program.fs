@@ -80,8 +80,9 @@ let updateArrived (ctx: UpdateContext) =
 
 [<EntryPoint>]
 let main _ =
+    System.IO.File.Copy(Environment.GetEnvironmentVariable("BOT_TOKEN_FILE"), $"{Environment.CurrentDirectory}/token", true)
     async {
-        let config = Config.defaultConfig |> Config.withReadTokenFromEnv "TrashRecyclingBotToken"
+        let config = Config.defaultConfig |> Config.withReadTokenFromFile
         let! _ = Api.deleteWebhookBase () |> api config
         return! startBot config updateArrived None
     } |> Async.RunSynchronously
