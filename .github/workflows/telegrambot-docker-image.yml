@@ -19,7 +19,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Sandbox/TelegramBot/src/TelegramBot/Dockerfile --tag trash-recycling-bot:$(date +%s)
+      run: docker build Sandbox/TelegramBot --file Sandbox/TelegramBot/src/TelegramBot/Dockerfile --tag trash-recycling-bot:$(date +%s)
       
     - name: Log into GitHub Container Registry
       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
