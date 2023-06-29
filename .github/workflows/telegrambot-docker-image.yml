@@ -22,7 +22,7 @@ jobs:
       run: docker build Sandbox/TelegramBot --file Sandbox/TelegramBot/src/TelegramBot/Dockerfile --tag trash-recycling-bot:$(date +%s)
       
     - name: Log into GitHub Container Registry
-      uses: docker/login-action@1
+      uses: docker/login-action@2
       with:
         registry: ${{ secrets.ACR_ENDPOINT }}
         username: ${{ secrets.ACR_USERNAME }}
