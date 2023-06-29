@@ -19,5 +19,3 @@ secrets:
   BotTokenSecret:
     file: ./token
 
-    
-
