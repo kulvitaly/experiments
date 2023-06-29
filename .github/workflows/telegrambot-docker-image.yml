@@ -22,7 +22,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build Sandbox/TelegramBot --file Sandbox/TelegramBot/src/TelegramBot/Dockerfile --tag trash-recycling-bot:$(date +%s)
+      run: docker build Sandbox/TelegramBot --file Sandbox/TelegramBot/src/TelegramBot/Dockerfile --tag latest 
       
     - name: Log into GitHub Container Registry
       uses: docker/login-action@v2
@@ -34,7 +34,9 @@ jobs:
     - name: Build & Push
       uses: docker/build-push-action@v2
       with:
+        context: ./Sandbox/TelegramBot
+        file: ./Sandbox/TelegramBot/src/TelegramBot/Dockerfile
         push: true
         build-args: |
           version=${{ steps.tag.outputs.tag }}
-        tags: ${{ secrets.ACR_ENDPOINT }}/${{ env.IMAGE_NAME }}
+        tags: ${{ secrets.ACR_ENDPOINT }}/${{ env.IMAGE_NAME }}:latest

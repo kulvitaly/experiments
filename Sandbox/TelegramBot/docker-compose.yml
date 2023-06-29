@@ -17,6 +17,4 @@ services:
       - BotTokenSecret
 secrets:
   BotTokenSecret:
-    file: ./token
-    
-
+    file: ./token    
