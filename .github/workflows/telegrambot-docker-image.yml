@@ -22,8 +22,16 @@ jobs:
       run: docker build Sandbox/TelegramBot --file Sandbox/TelegramBot/src/TelegramBot/Dockerfile --tag trash-recycling-bot:$(date +%s)
       
     - name: Log into GitHub Container Registry
-      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
+      uses: docker/login-action@1
+      with:
+        registry: ${{ secrets.ACR_ENDPOINT }}
+        username: ${{ secrets.ACR_USERNAME }}
+        password: ${{ secrets.ACR_PASSWORD }}
 
-    - name: Push image to GitHub Container Registry
-      run: |
-        IMAGE_ID=ghcr.io/${{ github.repository_owner }}/trash-recycling-bot:${{ github.run_id }}
+    - name: Build & Push
+      uses: docker/build-push-action@v2
+      with:
+        push: true
+        build-args: |
+          version=${{ steps.tag.outputs.tag }}
+        tags: ${{ secrets.ACR_ENDPOINT }}/${{ env.IMAGE_NAME }}:${{ steps.tag.outputs.tag }}
