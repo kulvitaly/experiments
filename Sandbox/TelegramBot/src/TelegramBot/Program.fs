@@ -38,11 +38,33 @@ let CategoryToString(category: MaterialCategory) =
         | 0 -> $"{colors} {category.Name}"
         | n -> $"{colors} {category.Name} ({aliases})"
 
+
 let BuildCategoriesMessage(categories: MaterialCategory list) =
     categories
     |> List.map CategoryToString
     |> String.concat Environment.NewLine
-    
+
+let GetInroductionMessage() =
+    @"Ласкаво просимо в Trash Recycling bot
+    Бот допомагає сортувати сміття відповідно бо правил сортування УБС
+
+Умовні позначення:
+    🟢 - на переробку
+    🟠 - спалювання
+    🔴 - доведеться викинути
+Комманди:
+/categories - короткий список усіх категорій
+
+Вводь назву категорії (наприклад PET-1) щоб отримати більш детальну інформацію по категорії"
+
+let ShowIntroduction (ctx: UpdateContext) =
+    match ctx.Update.Message with
+    | Some { MessageId = messageId; Chat = chat } ->
+        Api.sendMessage chat.Id (GetInroductionMessage()) |> api ctx.Config
+        |> Async.Ignore
+        |> Async.Start
+    | _ -> ()
+
 let ShowCategories (ctx: UpdateContext) =
     // TODO: we should use DI
     let repo = new SimpleRepository()
@@ -73,8 +95,8 @@ let HandleCommand ctx command =
 let updateArrived (ctx: UpdateContext) =
 
     processCommands ctx [|
-        cmd "/start" ShowCategories
-        cmdScan "/say %s" (fun text _ -> printfn "User invoked say command with text %s" text)
+        cmd "/start" ShowIntroduction
+        cmd "/categories" ShowCategories
         cmdScan "%s" (fun cmd ctx -> HandleCommand ctx cmd)
     |] |> ignore
 
