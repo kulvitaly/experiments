@@ -8,23 +8,23 @@ type SimpleRepository() =
         member this.getMaterialCategories() =
             [
                 // TODO: we should calculate recycling classes based on material rules
-                MaterialCategory("PET-1", ["1"; "Поліетилентерефталат"; "ПЕТ"; "ПЕТФ"; "PET"; "PETE"], [Recycling; Burning])
-                MaterialCategory("HDPE", ["2"; "Поліетилен високої щільності"; "Поліетилен низького тиску"; "PE-HD"], [Recycling])
-                MaterialCategory("PVC", ["3"; "Полівінілхлорид"; "ПВХ"], [ThrowingAway])
-                MaterialCategory("LDPE", ["4"; "Поліетилен низької щільності"; "Поліетилен високого тиску"; "PE-LD"], [Recycling])
+                MaterialCategory("PET-1", ["♻️1"; "Поліетилентерефталат"; "ПЕТ"; "ПЕТФ"; "PET"; "PETE"], [Recycling; Burning])
+                MaterialCategory("HDPE", ["♻️2"; "Поліетилен високої щільності"; "Поліетилен низького тиску"; "PE-HD"], [Recycling])
+                MaterialCategory("PVC", ["♻️3"; "Полівінілхлорид"; "ПВХ"], [ThrowingAway])
+                MaterialCategory("LDPE", ["♻️4"; "Поліетилен низької щільності"; "Поліетилен високого тиску"; "PE-LD"], [Recycling])
                 MaterialCategory("C/LDPE", [], [Burning])
-                MaterialCategory("PP", ["5"; "Поліпропілен"; "ПП"], [Recycling; Burning])
-                MaterialCategory("PS", ["6"; "Полістирол"; "ПС"], [Recycling; Burning])
-                MaterialCategory("PC", ["7"; "Полікарбонат"], [Recycling; Burning])
-                MaterialCategory("PAP", ["Папір"; "20-27"], [Recycling; Burning])
+                MaterialCategory("PP", ["♻️5"; "Поліпропілен"; "ПП"], [Recycling; Burning])
+                MaterialCategory("PS", ["♻️6"; "Полістирол"; "ПС"], [Recycling; Burning])
+                MaterialCategory("PC", ["♻️7"; "Полікарбонат"], [Recycling; Burning])
+                MaterialCategory("PAP", ["Папір"; "♻️20-27"], [Recycling; Burning])
                 MaterialCategory("C/PAP", ["Комбіноване паковання"; "81-84"; "Tetra Pak"; "Pure Pack"; "Elo Pak"], [Recycling])
-                MaterialCategory("FE", ["40"], [Recycling])
-                MaterialCategory("ALU", ["41"], [Recycling])
-                MaterialCategory("GL", ["70-79"; "Скло"], [Recycling; ThrowingAway]) 
+                MaterialCategory("FE", ["♻️40"], [Recycling])
+                MaterialCategory("ALU", ["♻️41"], [Recycling])
+                MaterialCategory("GL", ["♻️70-79"; "Скло"], [Recycling; ThrowingAway]) 
                 MaterialCategory("Other", [], [Recycling; Burning; ThrowingAway])
             ]
         member this.getMaterialInfo(name: string): Material list = 
-            match name with
+            match name.ToUpper() with
             | "PET-1" -> 
                 [
                     Material("Пляшки прозора з-під напоїв без відтінку", Recycling, [])
