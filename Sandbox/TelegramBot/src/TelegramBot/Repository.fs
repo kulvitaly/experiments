@@ -3,7 +3,7 @@ namespace Recycling.Repository
 open Recycling.Domain
 
 type SimpleRepository() =
-
+    
     interface IRecyclingRepository with 
         member this.getMaterialCategories() =
             [
@@ -23,6 +23,7 @@ type SimpleRepository() =
                 MaterialCategory("GL", ["♻️70-79"; "Скло"], [Recycling; ThrowingAway]) 
                 MaterialCategory("Other", [], [Recycling; Burning; ThrowingAway])
             ]
+        
         member this.getMaterialInfo(name: string): Material list = 
             match name.ToUpper() with
             | "PET-1" -> 
@@ -170,5 +171,48 @@ type SimpleRepository() =
                     Material("ДСП/фанери/великі шматки меблів", ThrowingAway, [])
                     Material("Склопакети", ThrowingAway, [])
                 ]
-            | _ -> [Material("Unknown category", ThrowingAway, [])]
+            | _ -> this.SearchByAlias name
+    
+    member private this.SearchByAlias(alias: string) =
+        let category = 
+            (this :> IRecyclingRepository).getMaterialCategories()
+            |> List.tryFind (fun category -> this.IsMatch alias category.Aliases)
+
+        match category with
+        | Some(category) -> (this :> IRecyclingRepository).getMaterialInfo(category.Name)
+        | None -> [Material("Unknown category", ThrowingAway, [])]
+
+    member private this.SplitNumberRange(range: string) =
+        let array = range.Split('-')
+
+        match array.Length with
+        | 1 -> [range]
+        | 2 -> this.GetRange array.[0] array.[1]
+        | _ -> [range]
+
+    member private this.ExpandAliasRange(alias: string) =
+        let (|Prefix|_|) (p:string) (s:string) =
+            if s.StartsWith(p) then
+                Some(s.Substring(p.Length))
+            else
+                None
+
+        match alias with
+        | Prefix "♻️" numberRange -> this.SplitNumberRange numberRange
+        | _ -> [alias]
+
+
+    member private this.GetRange startRange endRange = 
+        let startNumber = startRange |> int
+        let endNumber = endRange |> int
+        
+        let range = [startNumber..endNumber]
+
+        let strRange = range |> List.map (fun number -> number.ToString()) 
+        strRange
+
+    member private this.IsMatch name aliases =
+        aliases
+        |> List.map (fun alias -> this.ExpandAliasRange alias)
+        |> List.exists (fun expanded -> List.exists (fun a -> a = name) expanded)
              
