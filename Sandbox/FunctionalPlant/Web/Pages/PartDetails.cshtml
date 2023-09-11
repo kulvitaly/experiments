@@ -1,0 +1,16 @@
+@page "/partdetails/{id}"
+@model PartDetailsModel
+@using Models.Media;
+<table class="table table-stripped">
+    <tr><th>Id</th><td>@Model.Part.Id</td></tr>
+    <tr><th>SKU</th><td>@Model.Part.Sku.Value</td></tr>
+    <tr><th>Label</th><td>@Model.Part.Name</td></tr>
+    <tr>
+        <th>Barcode</th>
+        <td><img src="data:@Model.BarcodeImage.EncodeBase64().Content"></td>
+    </tr>
+</table>
+
+@{
+    ViewData["Title"] = "Home Page";
+}

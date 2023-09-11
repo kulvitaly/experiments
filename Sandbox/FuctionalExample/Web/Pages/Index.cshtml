@@ -1,0 +1,9 @@
+﻿@page
+@using Components; 
+@model IndexModel
+<component type="typeof(Components.BusinessMonths)" render-mode="Static" param-fortimestamp="@DateTime.UtcNow" />
+
+@{
+    ViewData["Title"] = "Home page";
+}
+

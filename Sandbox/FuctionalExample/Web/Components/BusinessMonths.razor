@@ -1,0 +1,18 @@
+@using Models.Time;
+<table class="table table-striped">
+
+    @foreach (var year in DateTime.UtcNow.ToYear().Decade)
+    {
+        <tr>
+            <th>@year.Number</th>
+            @foreach (var month in year.Months)
+            {
+                <td>@($"{this.MonthNames[month.Ordinal]}")</td>
+            }
+        </tr>
+    }
+</table>
+@code {
+    [Parameter] public DateTime ForTimestamp { get; set; }
+    string[] MonthNames = new string[] { "", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+}
