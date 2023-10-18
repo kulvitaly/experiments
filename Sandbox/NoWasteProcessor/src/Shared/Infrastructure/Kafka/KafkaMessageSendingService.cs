@@ -1,0 +1,85 @@
+﻿using Common.Messaging.Administration;
+using Common.Messaging.Sending;
+using Confluent.Kafka;
+using Confluent.Kafka.Admin;
+using Domain.SharedKernel;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Nito.AsyncEx;
+using System.Text.Json;
+
+namespace Infrastructure.Kafka;
+
+public class KafkaMessageSendingService : IMessageSender, ITopicAdministrator
+{
+    private readonly ILogger<KafkaMessageSendingService> _logger;
+    private readonly AsyncLazy<ClientConfig> _clientConfigLazy;
+
+    public KafkaMessageSendingService(IOptions<KafkaOptions> kafkaOptions, ILogger<KafkaMessageSendingService> logger)
+    {
+        _logger = logger;
+
+        _clientConfigLazy = new(() => LoadConfigAsync(kafkaOptions.Value));
+    }
+
+    public async Task CreateTopic(TopicInfo topicSpec, CancellationToken cancellationToken)
+    {
+        var config = await _clientConfigLazy;
+        using (var adminClient = new AdminClientBuilder(config).Build())
+        {
+            try
+            {
+                await adminClient.CreateTopicsAsync(new List<TopicSpecification> {
+                    new TopicSpecification { Name = topicSpec.Name, NumPartitions = topicSpec.PartitionCount, ReplicationFactor = topicSpec.ReplicationFactor } });
+            }
+            catch (CreateTopicsException e)
+            {
+                if (e.Results[0].Error.Code != ErrorCode.TopicAlreadyExists)
+                {
+                    _logger.LogError(e, "An error occured creating topic {Name}: {Reason}", topicSpec.Name, e.Results[0].Error.Reason);
+                }
+                else
+                {
+                    _logger.LogInformation(e, "Topic {Name} already exists", topicSpec.Name);
+                }
+            }
+        }
+    }
+
+    public async Task Send(string topic, Message message, CancellationToken cancellationToken)
+    {
+        var config = await _clientConfigLazy;
+        using (var producer = new ProducerBuilder<string, string>(config).Build())
+        {
+            var key = message.Key;
+            var value = JsonSerializer.Serialize(message);
+
+            _logger.LogInformation("Producing record: {Key} {Value}", key, value);
+
+            // TODO: use ProduceAsync
+            producer.Produce(topic, new Message<string, string> { Key = key, Value = value },
+                (deliveryReport) =>
+                {
+                    if (deliveryReport.Error.Code != ErrorCode.NoError)
+                    {
+                        _logger.LogError("Failed to deliver message: {Reason}", deliveryReport.Error.Reason);
+                    }
+                    else
+                    {
+                        _logger.LogInformation("Produced message to: {TopicPartitionOffset}", deliveryReport.TopicPartitionOffset);
+                    }
+                });
+
+            producer.Flush(TimeSpan.FromSeconds(10));
+        }
+    }
+
+    // copied from example: https://github.com/confluentinc/examples/blob/7.2.1-post/clients/cloud/csharp/Program.cs
+    private async Task<ClientConfig> LoadConfigAsync(KafkaOptions kafkaOptions)
+    {
+        return new ClientConfig
+        {
+            BootstrapServers = kafkaOptions.BootstrapServer
+        };
+    }
+}

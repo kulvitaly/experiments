@@ -1,0 +1,12 @@
+<Project>
+
+  <PropertyGroup>
+    <Copyright>Copyright 2023</Copyright>
+
+    <TargetFramework>net6.0</TargetFramework>
+    <NoWarn>1591</NoWarn>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+</Project>
