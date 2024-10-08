@@ -1,21 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace LeetCode;
 
-namespace LeetCode
+public class Startup
 {
-    public class Solution
+    public static void Main()
     {
-
-
- 
-
-
-
-
-
-        public static void Main()
-        {
-        }
     }
 }

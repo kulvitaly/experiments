@@ -6,37 +6,37 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.RawContent.Commands;
 
-public record AddRawContentMessageCommand(string RawContent) : ICommand<Unit>;
+public record AddRawContentMessageCommand(string RawContent) : ICommand<SourceContent>;
 
-public class AddRawContentMessageCommandHandler : IRequestHandler<AddRawContentMessageCommand, Unit>
+public class AddRawContentMessageCommandHandler : IRequestHandler<AddRawContentMessageCommand, SourceContent>
 {
     private readonly ISourceDbContext _context;
 
     public AddRawContentMessageCommandHandler(ISourceDbContext context)
         => _context = context;
 
-    public async Task<Unit> Handle(AddRawContentMessageCommand request, CancellationToken cancellationToken)
-    {
-        if (await IsDuplicate(request.RawContent, cancellationToken))
-        {
-            return Unit.Value;
-        }
-
-        await _context.SourceContents.AddAsync(new SourceContent
-        {
-            Content = request.RawContent,
-            Timestamp = DateTimeOffset.UtcNow
-        }, cancellationToken);
-
-        return Unit.Value;
-    }
-
-    private async Task<bool> IsDuplicate(string content, CancellationToken cancellationToken)
+    public async Task<SourceContent> Handle(AddRawContentMessageCommand request, CancellationToken cancellationToken)
     {
         var lastMessage = await _context.SourceContents.AsNoTracking()
             .OrderByDescending(c => c.Timestamp)
             .FirstOrDefaultAsync(cancellationToken);
 
-        return lastMessage != null && lastMessage.Content.Equals(content, StringComparison.OrdinalIgnoreCase);
+        if (IsDuplicate(lastMessage, request.RawContent, cancellationToken))
+        {
+            return lastMessage!;
+        }
+
+        var sourceContent = new SourceContent
+        {
+            Content = request.RawContent,
+            Timestamp = DateTimeOffset.UtcNow
+        };
+
+        await _context.SourceContents.AddAsync(sourceContent, cancellationToken);
+
+        return sourceContent;
     }
+
+    private bool IsDuplicate(SourceContent? source, string content, CancellationToken cancellationToken)
+        => source != null && source.Content.Equals(content, StringComparison.OrdinalIgnoreCase);
 }

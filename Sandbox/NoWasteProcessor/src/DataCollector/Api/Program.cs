@@ -4,6 +4,7 @@ using Infrastructure.Kafka;
 using MediatR;
 using Persistence;
 using Serilog;
+using Api.GraphQL;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +20,8 @@ builder.Services.AddSwaggerGen();
 builder.Services
     .AddKafkaProducer(builder.Configuration)
     .AddMediatR(typeof(CreateTopicCommand), typeof(GetLatestContentQuery))
-    .AddPersistence(builder.Configuration);
+    .AddPersistence(builder.Configuration)
+    .AddGraphQl();
 
 var app = builder.Build();
 
@@ -35,6 +37,12 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.MapGet("/", () => "Hello from NoWasteProcessor");
+
+app.UseRouting()
+    .UseEndpoints(endpoints =>
+    {
+        endpoints.MapGraphQL();
+    });
 
 app.Logger.LogInformation("NoWasteProcessor API started.");
 

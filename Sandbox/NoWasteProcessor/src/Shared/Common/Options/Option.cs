@@ -20,11 +20,11 @@ public class None
 
 public sealed class Some<T> : Option<T>
 {
-    public T Content { get; }
+    public T Value { get; }
 
-    public Some(T content) => Content = content;
+    public Some(T value) => Value = value;
 
-    public override string ToString() => $"Some {Content?.ToString() ?? "<null>"}";
+    public override string ToString() => $"Some {Value?.ToString() ?? "<null>"}";
 }
 
 public sealed class None<T> : Option<T>
