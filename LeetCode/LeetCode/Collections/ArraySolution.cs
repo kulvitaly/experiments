@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LeetCode.Collections
+﻿namespace LeetCode.Collections
 {
     public class ArraySolution
     {

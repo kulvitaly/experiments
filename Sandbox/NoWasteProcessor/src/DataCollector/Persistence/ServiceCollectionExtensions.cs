@@ -1,10 +1,10 @@
 ﻿using Application.Common.Persistence;
 using Application.Persistence;
+using Common.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MOM360.Application.Common.Behaviours;
 
 namespace Persistence;
 
@@ -16,5 +16,7 @@ public static class ServiceCollectionExtensions
             .AddScoped<SourceDbContextInitializer>()
             .AddScoped<ISourceDbContext>(provider => provider.GetRequiredService<SourceDbContext>())
             .AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<SourceDbContext>())
-            .AddTransient(typeof(IPipelineBehavior<,>), typeof(TransactionBehaviour<,>));
+            //TODO: implement me
+            .AddTransient(typeof(IPipelineBehavior<,>), typeof(TransactionBehaviour<,>))
+        ;
 }
