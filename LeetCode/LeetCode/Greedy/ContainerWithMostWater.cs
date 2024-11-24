@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace LeetCode.Greedy.ContainerWithMostWater;
+﻿namespace LeetCode.Greedy.ContainerWithMostWater;
 
 public class Solution
 {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace LeetCode.Collections.DividePlayersIntoTeamsofEqualSkill;
+﻿namespace LeetCode.Collections.DividePlayersIntoTeamsofEqualSkill;
 
 public class Solution
 {

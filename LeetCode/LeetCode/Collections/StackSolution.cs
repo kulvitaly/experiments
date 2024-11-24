@@ -1,45 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace LeetCode.Collections;
 
-namespace LeetCode.Collections
+public class StackSolution
 {
-    public class StackSolution
+    public bool IsValid(string s)
     {
-        public bool IsValid(string s)
+        var stack = new Stack<char>();
+
+        foreach (char ch in s)
         {
-            var stack = new Stack<char>();
-
-            foreach (char ch in s)
+            if (IsStart(ch))
             {
-                if (IsStart(ch))
-                {
-                    stack.Push(ch);
-                    continue;
-                }
-
-                if (!stack.TryPop(out char start))
-                {
-                    return false;
-                }
-                
-                if (!IsAppropriate(start, ch))
-                    return false;
+                stack.Push(ch);
+                continue;
             }
 
-            return stack.Count == 0;
-
-            bool IsAppropriate(char chStart, char chEnd)
+            if (!stack.TryPop(out char start))
             {
-                return chStart == '(' && chEnd == ')' ||
-                       chStart == '{' && chEnd == '}' ||
-                       chStart == '[' && chEnd == ']';
+                return false;
             }
 
-            bool IsStart(char ch)
-            {
-                return ch == '(' || ch == '{' || ch == '[';
-            }
+            if (!IsAppropriate(start, ch))
+                return false;
+        }
+
+        return stack.Count == 0;
+
+        bool IsAppropriate(char chStart, char chEnd)
+        {
+            return chStart == '(' && chEnd == ')' ||
+                   chStart == '{' && chEnd == '}' ||
+                   chStart == '[' && chEnd == ']';
+        }
+
+        bool IsStart(char ch)
+        {
+            return ch == '(' || ch == '{' || ch == '[';
         }
     }
 }

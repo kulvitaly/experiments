@@ -1,6 +1,4 @@
 ﻿using LeetCode.Greedy.ContainerWithMostWater;
-using System.Collections.Generic;
-using Xunit;
 
 namespace LeetCode.Tests.Greedy;
 

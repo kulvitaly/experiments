@@ -1,51 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace LeetCode.Collections;
 
-namespace LeetCode.Collections
+public class ListNode
 {
-     public class ListNode
-     {
-         public int val;
+    public int val;
 
-         public ListNode next;
+    public ListNode next;
 
-         public ListNode(int x) { val = x; }
-     }
-    public class LinkedListSolution
+    public ListNode(int x) { val = x; }
+}
+public class LinkedListSolution
+{
+    public ListNode MergeTwoLists(ListNode l1, ListNode l2)
     {
-        public ListNode MergeTwoLists(ListNode l1, ListNode l2)
+        ListNode? result = null;
+        ListNode? currentResult = null;
+
+        while (l1 != null || l2 != null)
         {
-            ListNode result = null;
-            ListNode currentResult = null;
-
-            while (l1 != null || l2 != null)
+            if (l1 == null || l2?.val < l1?.val)
             {
-                if (l1 == null || l2?.val < l1?.val)
-                {
-                    AssignCurrent(l2);
-                    l2 = l2.next;
-                    continue;
-                }
-
-                AssignCurrent(l1);
-                l1 = l1.next;
+                AssignCurrent(l2!);
+                l2 = l2!.next;
+                continue;
             }
 
-            return result;
+            AssignCurrent(l1!);
+            l1 = l1.next;
+        }
 
-            void AssignCurrent(ListNode next)
+        return result!;
+
+        void AssignCurrent(ListNode next)
+        {
+            var tmpNode = new ListNode(next.val);
+            if (currentResult != null)
             {
-                var tmpNode = new ListNode(next.val);
-                if (currentResult != null)
-                {
-                    currentResult.next = tmpNode;
-                }
-
-                currentResult = tmpNode;
-                if (result == null)
-                    result = tmpNode;
+                currentResult.next = tmpNode;
             }
+
+            currentResult = tmpNode;
+            if (result == null)
+                result = tmpNode;
         }
     }
 }
