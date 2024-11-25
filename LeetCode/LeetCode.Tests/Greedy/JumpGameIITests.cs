@@ -1,6 +1,4 @@
 ﻿using LeetCode.Greedy.JumpGameII;
-using System.Collections.Generic;
-using Xunit;
 
 namespace LeetCode.Tests.Greedy;
 

@@ -1,7 +1,4 @@
-﻿using FluentAssertions;
-using LeetCode.DynamicProgramming.MaximumSubarray;
-using System.Collections.Generic;
-using Xunit;
+﻿using LeetCode.DynamicProgramming.MaximumSubarray;
 
 namespace LeetCode.Tests.DynamicProgramming;
 

@@ -1,23 +1,22 @@
-﻿namespace LeetCode.Collections
+﻿namespace LeetCode.Collections;
+
+public class ArraySolution
 {
-    public class ArraySolution
+    public int RemoveDuplicates(int[] nums)
     {
-        public int RemoveDuplicates(int[] nums)
+        if (nums.Length == 0)
+            return 0;
+
+        int position = 0;
+
+        for (int i = 1; i < nums.Length; ++i)
         {
-            if (nums.Length == 0)
-                return 0;
-
-            int position = 0;
-
-            for (int i = 1; i < nums.Length; ++i)
+            if (nums[position] < nums[i])
             {
-                if (nums[position] < nums[i])
-                {
-                    nums[++position] = nums[i];
-                }
+                nums[++position] = nums[i];
             }
-
-            return position + 1;
         }
+
+        return position + 1;
     }
 }

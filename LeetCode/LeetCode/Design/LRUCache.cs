@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace LeetCode.Design;
+﻿namespace LeetCode.Design;
 
 public class LRUCache
 {

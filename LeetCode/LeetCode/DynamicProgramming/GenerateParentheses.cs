@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace LeetCode.Tests.DynamicProgramming.GenerateParentheses;
+﻿namespace LeetCode.Tests.DynamicProgramming.GenerateParentheses;
 
 public class Solution
 {

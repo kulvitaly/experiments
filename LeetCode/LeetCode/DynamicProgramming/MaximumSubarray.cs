@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace LeetCode.DynamicProgramming.MaximumSubarray;
+﻿namespace LeetCode.DynamicProgramming.MaximumSubarray;
 
 public class Solution
 {
@@ -16,7 +14,7 @@ public class Solution
             }
 
             currentSum += nums[i];
-            
+
             maxSum = Math.Max(maxSum, currentSum);
         }
 
