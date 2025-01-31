@@ -14,4 +14,5 @@ public class StackSolutionTests
     {
         Assert.Equal(expected, new StackSolution().IsValid(value));
     }
+
 }
