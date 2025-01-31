@@ -18,4 +18,4 @@ type Material(name: string, recyclingClass: RecyclingClass, notes: string list) 
 type IRecyclingRepository =
      abstract member getMaterialCategories : unit -> MaterialCategory list
      abstract member getMaterialInfo : string -> Material list
-     
+   
