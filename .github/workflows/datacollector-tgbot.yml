@@ -2,14 +2,14 @@ name: Build and deploy .NET Core application to Web App datacollector-tgbot
 on:
   push:
     branches: [ "master" ]
-    paths:
-      - 'Sandbox/NoWasteProcessor/**'
+    #paths:
+    #  - 'Sandbox/NoWasteProcessor/**'
 env:
   AZURE_WEBAPP_NAME: datacollector-tgbot
-  AZURE_WEBAPP_PACKAGE_PATH: src/DataCollector/Api/publish
+  AZURE_WEBAPP_PACKAGE_PATH: Sandbox/NoWasteProcessor/src/DataCollector/Api/publish
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 6.0.x
-  WORKING_DIRECTORY: src/DataCollector/Api
+  WORKING_DIRECTORY: Sandbox/NoWasteProcessor/src/DataCollector/Api
 jobs:
   build:
     runs-on: ubuntu-latest
