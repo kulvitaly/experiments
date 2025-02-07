@@ -1,1 +1,1 @@
-# API to store raw data grabbed from "No waste" web page. 
+# API to store raw data grabbed from "No waste" web page for future processing. 
