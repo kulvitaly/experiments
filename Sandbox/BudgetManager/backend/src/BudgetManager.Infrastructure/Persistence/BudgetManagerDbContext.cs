@@ -1,5 +1,7 @@
 using System.Reflection;
 using BudgetManager.Application.Common.Interfaces;
+using BudgetManager.Domain.Categories;
+using BudgetManager.Domain.Families;
 using Microsoft.EntityFrameworkCore;
 
 namespace BudgetManager.Infrastructure.Persistence;
@@ -7,7 +9,8 @@ namespace BudgetManager.Infrastructure.Persistence;
 public class BudgetManagerDbContext(DbContextOptions<BudgetManagerDbContext> options)
     : DbContext(options), IBudgetManagerDbContext, IUnitOfWork
 {
-    // DbSet<T> properties will be added here as entities are introduced.
+    public DbSet<Category> Categories { get; set; } = null!;
+    public DbSet<Family> Families { get; set; } = null!;
 
     Task IUnitOfWork.SaveChangesAsync(CancellationToken cancellationToken)
         => base.SaveChangesAsync(cancellationToken);

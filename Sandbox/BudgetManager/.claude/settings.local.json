@@ -6,7 +6,10 @@
       "Bash(dotnet add:*)",
       "Bash(dotnet restore:*)",
       "Bash(dotnet build:*)",
-      "Bash(dotnet test:*)"
+      "Bash(dotnet test:*)",
+      "Bash(find /c/Personal/github/experiments/Sandbox/BudgetManager/backend/src -type d -name BudgetManager.*)",
+      "Bash(xargs grep:*)",
+      "Bash(dotnet ef:*)"
     ]
   }
 }

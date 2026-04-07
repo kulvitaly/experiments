@@ -101,6 +101,39 @@ npm test          # Jest / Vitest
 docker-compose up -d   # start PostgreSQL
 ```
 
+## Code Style
+
+- **No `Async` suffix** — do not add `Async` to async method names.
+- **Model-first GraphQL** — for each aggregate exposed via GraphQL, define an `ObjectType<T>` (e.g. `CategoryObjectType : ObjectType<Category>`) in `BudgetManager.Api/GraphQL/{Feature}/` and register it with `.AddType<>()` before adding queries or mutations that return the aggregate.
+
+## CQRS Conventions
+
+- Queries and commands return **domain entities directly** — no DTOs.
+- Handlers are `internal sealed` and live in the same file as their query/command record.
+- **Never call `SaveChangesAsync` in a handler** — `TransactionBehaviour` in the pipeline calls it automatically after every command.
+- Use `IQuery<TResponse>` for reads and `ICommand<TResponse>` for writes (both in `BudgetManager.Application.Common.MediatR`).
+
+## EF Core Conventions
+
+- **Typed ID value converters** — all `Key<Guid>` ID types need explicit conversion in `IEntityTypeConfiguration<T>`:
+  ```csharp
+  builder.Property(e => e.Id).HasConversion(id => id.Value, value => new EntityId(value));
+  ```
+- **Enum columns** — store as string with `.HasConversion<string>()` to avoid ordinal drift.
+- **Collections not yet mapped** — use `builder.Ignore(e => e.Collection)` until the related aggregate has its own `DbSet`.
+- EF Core migrations require the `dotnet-ef` global tool: `dotnet tool install --global dotnet-ef`.
+
+## GraphQL Conventions
+
+- GraphQL resolver methods take **`Guid` parameters** (not typed IDs) — construct the typed ID when dispatching to MediatR:
+  ```csharp
+  mediator.Send(new GetIncomeCategoriesQuery(new FamilyId(familyId)), cancellationToken)
+  ```
+- Annotate resolver return types explicitly:
+  - Single entity: `[GraphQLType(typeof(FooObjectType))]`
+  - Collection: `[GraphQLType(typeof(ListType<FooObjectType>))]`
+- In `ObjectType<T>`, unwrap typed IDs to `Guid` via `.Resolve(ctx => ctx.Parent<T>().Id.Value)`.
+
 ## Key Architectural Decisions
 
 - **Clean Architecture** — Domain has zero external dependencies; Application depends only on Domain; Infrastructure implements Application interfaces.
