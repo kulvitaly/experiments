@@ -10,8 +10,6 @@ namespace BudgetManager.Api.GraphQL;
 
 public class Query
 {
-    public string Ping() => "pong";
-
     [GraphQLType(typeof(ListType<CategoryObjectType>))]
     public Task<IReadOnlyList<Category>> IncomeCategories(
         Guid familyId,

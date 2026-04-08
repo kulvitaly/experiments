@@ -13,7 +13,8 @@ public static class DependencyInjection
             .AddQueryType<Query>()
             .AddMutationType<Mutation>()
             .AddType<CategoryObjectType>()
-            .AddType<FamilyObjectType>();
+            .AddType<FamilyObjectType>()
+            .AddDataLoader<FamilyByIdDataLoader>();
 
         return services;
     }

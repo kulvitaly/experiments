@@ -6,6 +6,7 @@
     <Project Path="src/BudgetManager.Infrastructure/BudgetManager.Infrastructure.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/BudgetManager.Api.Tests/BudgetManager.Api.Tests.csproj" />
     <Project Path="tests/BudgetManager.Application.Tests/BudgetManager.Application.Tests.csproj" />
     <Project Path="tests/BudgetManager.Domain.Tests/BudgetManager.Domain.Tests.csproj" />
     <Project Path="tests/BudgetManager.Infrastructure.Tests/BudgetManager.Infrastructure.Tests.csproj" />
