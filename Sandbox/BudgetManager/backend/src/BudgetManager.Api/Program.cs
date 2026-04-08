@@ -29,3 +29,6 @@ static async Task InitializeDatabaseAsync(IHost app)
         .GetRequiredService<BudgetManagerDbContextInitializer>()
         .InitialiseAsync();
 }
+
+public partial class Program;
+

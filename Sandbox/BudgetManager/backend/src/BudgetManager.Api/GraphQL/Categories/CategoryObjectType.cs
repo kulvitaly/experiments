@@ -1,3 +1,4 @@
+using BudgetManager.Api.GraphQL.Families;
 using BudgetManager.Domain.Categories;
 using HotChocolate.Types;
 
@@ -23,5 +24,11 @@ public class CategoryObjectType : ObjectType<Category>
         descriptor.Field(c => c.FamilyId)
             .Type<NonNullType<UuidType>>()
             .Resolve(ctx => ctx.Parent<Category>().FamilyId.Value);
+
+        descriptor.Field("family")
+            .Type<NonNullType<FamilyObjectType>>()
+            .Resolve(ctx =>
+                ctx.DataLoader<FamilyByIdDataLoader>()
+                    .LoadAsync(ctx.Parent<Category>().FamilyId.Value, ctx.RequestAborted));
     }
 }

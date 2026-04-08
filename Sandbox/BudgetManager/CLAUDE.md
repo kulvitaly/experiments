@@ -105,6 +105,7 @@ docker-compose up -d   # start PostgreSQL
 
 - **No `Async` suffix** — do not add `Async` to async method names.
 - **Model-first GraphQL** — for each aggregate exposed via GraphQL, define an `ObjectType<T>` (e.g. `CategoryObjectType : ObjectType<Category>`) in `BudgetManager.Api/GraphQL/{Feature}/` and register it with `.AddType<>()` before adding queries or mutations that return the aggregate.
+- **FluentAssertions in tests** — use FluentAssertions (`.Should().Be(...)`, `.Should().NotBeEmpty()`, etc.) instead of `Assert.*` in all test projects.
 
 ## CQRS Conventions
 
