@@ -1,0 +1,39 @@
+name: Backend Tests
+
+on:
+  pull_request:
+    paths:
+      - 'backend/**'
+
+jobs:
+  test:
+    name: Run Backend Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+        working-directory: backend
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+        working-directory: backend
+
+      - name: Run tests
+        run: dotnet test --configuration Release --no-build --logger "trx;LogFileName=test-results.trx"
+        working-directory: backend
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: backend/**/*.trx
