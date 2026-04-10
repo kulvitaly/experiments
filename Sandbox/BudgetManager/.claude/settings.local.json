@@ -9,7 +9,11 @@
       "Bash(dotnet test:*)",
       "Bash(find /c/Personal/github/experiments/Sandbox/BudgetManager/backend/src -type d -name BudgetManager.*)",
       "Bash(xargs grep:*)",
-      "Bash(dotnet ef:*)"
+      "Bash(dotnet ef:*)",
+      "Bash(xargs cat:*)",
+      "Bash(dotnet package:*)",
+      "Bash(UPDATE_SCHEMA_SNAPSHOT=true dotnet test tests/BudgetManager.Api.Tests --configuration Release --filter \"FullyQualifiedName~SchemaSnapshotTests\")",
+      "mcp__playwright"
     ]
   }
 }

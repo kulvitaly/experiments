@@ -1,5 +1,6 @@
 using BudgetManager.Api.GraphQL.Categories;
 using BudgetManager.Api.GraphQL.Families;
+using BudgetManager.Api.GraphQL.Users;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BudgetManager.Api.GraphQL;
@@ -14,7 +15,9 @@ public static class DependencyInjection
             .AddMutationType<Mutation>()
             .AddType<CategoryObjectType>()
             .AddType<FamilyObjectType>()
-            .AddDataLoader<FamilyByIdDataLoader>();
+            .AddType<UserObjectType>()
+            .AddDataLoader<FamilyByIdDataLoader>()
+            .AddDataLoader<UserByIdDataLoader>();
 
         return services;
     }

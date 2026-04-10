@@ -1,5 +1,6 @@
 using BudgetManager.Domain.Categories;
 using BudgetManager.Domain.Families;
+using BudgetManager.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace BudgetManager.Application.Common.Interfaces;
@@ -12,4 +13,5 @@ public interface IBudgetManagerDbContext
 {
     DbSet<Category> Categories { get; }
     DbSet<Family> Families { get; }
+    DbSet<User> Users { get; }
 }
