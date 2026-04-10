@@ -1,4 +1,4 @@
-name: '[BudgetManager] Backend Tests'
+name: BudgetManager Backend Tests
 
 on:
   pull_request:
