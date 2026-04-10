@@ -1,9 +1,9 @@
-name: Backend Tests
+name: '[BudgetManager] Backend Tests'
 
 on:
   pull_request:
     paths:
-      - 'backend/**'
+      - 'Sandbox/BudgetManager/backend/**'
 
 jobs:
   test:
