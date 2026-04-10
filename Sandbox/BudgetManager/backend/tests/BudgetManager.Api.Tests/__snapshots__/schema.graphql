@@ -22,12 +22,24 @@ type Mutation {
   addIncomeCategory(name: String! iconUrl: String! familyId: UUID!): Category @cost(weight: "10")
   addExpenseCategory(name: String! iconUrl: String! familyId: UUID!): Category @cost(weight: "10")
   registerFamily(name: String! iconUrl: String): Family @cost(weight: "10")
+  createUser(name: String! iconUrl: String! familyId: UUID): User @cost(weight: "10")
+  updateUser(id: UUID! name: String! iconUrl: String!): User @cost(weight: "10")
+  deleteUser(id: UUID!): Boolean! @cost(weight: "10")
 }
 
 type Query {
   incomeCategories(familyId: UUID!): [Category] @cost(weight: "10")
   expenseCategories(familyId: UUID!): [Category] @cost(weight: "10")
   families: [Family] @cost(weight: "10")
+  users: [User] @cost(weight: "10")
+}
+
+type User {
+  id: UUID! @cost(weight: "10")
+  name: String!
+  iconUrl: String!
+  familyId: UUID @cost(weight: "10")
+  family: Family @cost(weight: "10")
 }
 
 enum CategoryType {

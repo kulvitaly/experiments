@@ -1,9 +1,12 @@
 using BudgetManager.Api.GraphQL.Categories;
 using BudgetManager.Api.GraphQL.Families;
+using BudgetManager.Api.GraphQL.Users;
 using BudgetManager.Application.Categories;
 using BudgetManager.Application.Families;
+using BudgetManager.Application.Users;
 using BudgetManager.Domain.Categories;
 using BudgetManager.Domain.Families;
+using BudgetManager.Domain.Users;
 using MediatR;
 
 namespace BudgetManager.Api.GraphQL;
@@ -29,4 +32,10 @@ public class Query
         [Service] IMediator mediator,
         CancellationToken cancellationToken)
         => mediator.Send(new GetFamiliesQuery(), cancellationToken);
+
+    [GraphQLType(typeof(ListType<UserObjectType>))]
+    public Task<IReadOnlyList<User>> Users(
+        [Service] IMediator mediator,
+        CancellationToken cancellationToken)
+        => mediator.Send(new GetUsersQuery(), cancellationToken);
 }
