@@ -332,3 +332,5 @@ War/Logs
 War/urls-*
 Sandbox/TelegramBot/token
 
+Sandbox/BudgetManager/.claude/settings.local.json
+.gitignore

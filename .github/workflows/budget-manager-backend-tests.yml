@@ -21,19 +21,19 @@ jobs:
 
       - name: Restore dependencies
         run: dotnet restore
-        working-directory: backend
+        working-directory: Sandbox/BudgetManager/backend
 
       - name: Build
         run: dotnet build --configuration Release --no-restore
-        working-directory: backend
+        working-directory: Sandbox/BudgetManager/backend
 
       - name: Run tests
         run: dotnet test --configuration Release --no-build --logger "trx;LogFileName=test-results.trx"
-        working-directory: backend
+        working-directory: Sandbox/BudgetManager/backend
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: test-results
-          path: backend/**/*.trx
+          path: Sandbox/BudgetManager/backend/**/*.trx
