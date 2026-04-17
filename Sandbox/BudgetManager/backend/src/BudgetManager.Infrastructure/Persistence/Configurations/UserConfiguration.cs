@@ -32,7 +32,5 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
             .HasForeignKey(u => u.FamilyId)
             .IsRequired(false)
             .OnDelete(DeleteBehavior.SetNull);
-
-        builder.Ignore(u => u.WalletIds);
     }
 }

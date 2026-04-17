@@ -25,6 +25,9 @@ type Mutation {
   createUser(name: String! iconUrl: String! familyId: UUID): User @cost(weight: "10")
   updateUser(id: UUID! name: String! iconUrl: String!): User @cost(weight: "10")
   deleteUser(id: UUID!): Boolean! @cost(weight: "10")
+  addWallet(name: String! iconUrl: String! type: WalletType! userId: UUID!): Wallet @cost(weight: "10")
+  editWallet(id: UUID! name: String! iconUrl: String! type: WalletType!): Wallet @cost(weight: "10")
+  deleteWallet(id: UUID!): Boolean! @cost(weight: "10")
 }
 
 type Query {
@@ -32,6 +35,7 @@ type Query {
   expenseCategories(familyId: UUID!): [Category] @cost(weight: "10")
   families: [Family] @cost(weight: "10")
   users: [User] @cost(weight: "10")
+  wallets(familyId: UUID! userId: UUID): [Wallet] @cost(weight: "10")
 }
 
 type User {
@@ -42,9 +46,25 @@ type User {
   family: Family @cost(weight: "10")
 }
 
+type Wallet {
+  id: UUID! @cost(weight: "10")
+  name: String!
+  iconUrl: String!
+  type: WalletType!
+  ownerId: UUID! @cost(weight: "10")
+  owner: User! @cost(weight: "10")
+}
+
 enum CategoryType {
   INCOME
   EXPENSE
+}
+
+enum WalletType {
+  CASH
+  DEBIT_CARD
+  CREDIT_CARD
+  SAVINGS
 }
 
 "The purpose of the `cost` directive is to define a `weight` for GraphQL types, fields, and arguments. Static analysis can use these weights when calculating the overall cost of a query or response."

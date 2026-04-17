@@ -1,12 +1,15 @@
 using BudgetManager.Api.GraphQL.Categories;
 using BudgetManager.Api.GraphQL.Families;
 using BudgetManager.Api.GraphQL.Users;
+using BudgetManager.Api.GraphQL.Wallets;
 using BudgetManager.Application.Categories;
 using BudgetManager.Application.Families;
 using BudgetManager.Application.Users;
+using BudgetManager.Application.Wallets;
 using BudgetManager.Domain.Categories;
 using BudgetManager.Domain.Families;
 using BudgetManager.Domain.Users;
+using BudgetManager.Domain.Wallets;
 using MediatR;
 
 namespace BudgetManager.Api.GraphQL;
@@ -38,4 +41,16 @@ public class Query
         [Service] IMediator mediator,
         CancellationToken cancellationToken)
         => mediator.Send(new GetUsersQuery(), cancellationToken);
+
+    [GraphQLType(typeof(ListType<WalletObjectType>))]
+    public Task<IReadOnlyList<Wallet>> Wallets(
+        Guid familyId,
+        Guid? userId,
+        [Service] IMediator mediator,
+        CancellationToken cancellationToken)
+        => mediator.Send(
+            new GetWalletsQuery(
+                new FamilyId(familyId),
+                userId.HasValue ? new UserId(userId.Value) : null),
+            cancellationToken);
 }

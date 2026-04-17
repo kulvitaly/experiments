@@ -1,12 +1,15 @@
 using BudgetManager.Api.GraphQL.Categories;
 using BudgetManager.Api.GraphQL.Families;
 using BudgetManager.Api.GraphQL.Users;
+using BudgetManager.Api.GraphQL.Wallets;
 using BudgetManager.Application.Categories;
 using BudgetManager.Application.Families;
 using BudgetManager.Application.Users;
+using BudgetManager.Application.Wallets;
 using BudgetManager.Domain.Categories;
 using BudgetManager.Domain.Families;
 using BudgetManager.Domain.Users;
+using BudgetManager.Domain.Wallets;
 using MediatR;
 
 namespace BudgetManager.Api.GraphQL;
@@ -62,4 +65,30 @@ public class Mutation
         [Service] IMediator mediator,
         CancellationToken cancellationToken)
         => mediator.Send(new DeleteUserCommand(id), cancellationToken);
+
+    [GraphQLType(typeof(WalletObjectType))]
+    public Task<Wallet> AddWallet(
+        string name,
+        string iconUrl,
+        WalletType type,
+        Guid userId,
+        [Service] IMediator mediator,
+        CancellationToken cancellationToken)
+        => mediator.Send(new AddWalletCommand(name, iconUrl, type, userId), cancellationToken);
+
+    [GraphQLType(typeof(WalletObjectType))]
+    public Task<Wallet> EditWallet(
+        Guid id,
+        string name,
+        string iconUrl,
+        WalletType type,
+        [Service] IMediator mediator,
+        CancellationToken cancellationToken)
+        => mediator.Send(new EditWalletCommand(id, name, iconUrl, type), cancellationToken);
+
+    public Task<bool> DeleteWallet(
+        Guid id,
+        [Service] IMediator mediator,
+        CancellationToken cancellationToken)
+        => mediator.Send(new DeleteWalletCommand(id), cancellationToken);
 }
