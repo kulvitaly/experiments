@@ -31,7 +31,5 @@ public class UserObjectType : ObjectType<User>
                 return ctx.DataLoader<FamilyByIdDataLoader>()
                     .LoadAsync(familyId.Value, ctx.RequestAborted);
             });
-
-        descriptor.Ignore(u => u.WalletIds);
     }
 }

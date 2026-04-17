@@ -1,6 +1,7 @@
 using BudgetManager.Api.GraphQL.Categories;
 using BudgetManager.Api.GraphQL.Families;
 using BudgetManager.Api.GraphQL.Users;
+using BudgetManager.Api.GraphQL.Wallets;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BudgetManager.Api.GraphQL;
@@ -16,8 +17,10 @@ public static class DependencyInjection
             .AddType<CategoryObjectType>()
             .AddType<FamilyObjectType>()
             .AddType<UserObjectType>()
+            .AddType<WalletObjectType>()
             .AddDataLoader<FamilyByIdDataLoader>()
-            .AddDataLoader<UserByIdDataLoader>();
+            .AddDataLoader<UserByIdDataLoader>()
+            .AddDataLoader<WalletByIdDataLoader>();
 
         return services;
     }

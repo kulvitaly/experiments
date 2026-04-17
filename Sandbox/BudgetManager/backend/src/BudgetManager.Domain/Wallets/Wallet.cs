@@ -7,29 +7,37 @@ public class Wallet : BaseEntity<WalletId>, IAggregateRoot
 {
     public string Name { get; private set; }
     public string IconUrl { get; private set; }
-    public decimal Value { get; private set; }
+    public WalletType Type { get; private set; }
     public UserId OwnerId { get; private set; }
+    public bool IsDeleted { get; private set; }
+    public DateTime? DeletedAt { get; private set; }
 
-    public Wallet(string name, string iconUrl, UserId ownerId)
+    private Wallet()
+    {
+        Name = string.Empty;
+        IconUrl = string.Empty;
+        OwnerId = default!;
+    }
+
+    public Wallet(string name, string iconUrl, WalletType type, UserId ownerId)
     {
         Id = new WalletId();
         Name = name;
         IconUrl = iconUrl;
+        Type = type;
         OwnerId = ownerId;
-        Value = 0;
     }
 
-    public void Deposit(decimal amount)
+    public void Update(string name, string iconUrl, WalletType type)
     {
-        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(amount);
-        Value += amount;
+        Name = name;
+        IconUrl = iconUrl;
+        Type = type;
     }
 
-    public void Withdraw(decimal amount)
+    public void SoftDelete()
     {
-        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(amount);
-        if (amount > Value)
-            throw new InvalidOperationException("Insufficient funds.");
-        Value -= amount;
+        IsDeleted = true;
+        DeletedAt = DateTime.UtcNow;
     }
 }
